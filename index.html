@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Abdulsamet Açıkgöz</title>
+<meta name="description" content="Abdulsamet Açıkgöz — hesaplarım ve projelerim.">
+<meta property="og:title" content="Abdulsamet Açıkgöz">
+<meta property="og:description" content="Hesaplarım ve projelerim.">
+<meta property="og:image" content="https://github.com/sametackgz41.png">
+<meta name="theme-color" content="#0f1115">
+<link rel="icon" href="https://github.com/sametackgz41.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+  :root {
+    --bg: #f5f3ee;
+    --card: #ffffff;
+    --text: #1b1d22;
+    --muted: #6b6f78;
+    --border: #e6e2d9;
+    --accent: #c8962e;
+    --shadow: 0 1px 2px rgba(0,0,0,.04), 0 4px 16px rgba(0,0,0,.05);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1115;
+      --card: #181b21;
+      --text: #eceae4;
+      --muted: #9a9ea8;
+      --border: #262a32;
+      --accent: #e0b04a;
+      --shadow: 0 1px 2px rgba(0,0,0,.3);
+    }
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 48px 16px 32px;
+    -webkit-font-smoothing: antialiased;
+  }
+  main { width: 100%; max-width: 440px; }
+  header { text-align: center; margin-bottom: 28px; }
+  .avatar {
+    width: 104px; height: 104px; border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--card);
+    box-shadow: 0 0 0 2px var(--accent), var(--shadow);
+    margin-bottom: 16px;
+  }
+  h1 { font-size: 1.45rem; font-weight: 700; letter-spacing: -.01em; }
+  .tagline { color: var(--muted); margin-top: 6px; font-size: .95rem; }
+  .socials { display: flex; justify-content: center; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+  .socials a {
+    width: 42px; height: 42px; border-radius: 50%;
+    display: grid; place-items: center;
+    background: var(--card); color: var(--text);
+    border: 1px solid var(--border);
+    font-size: 1.1rem; text-decoration: none;
+    transition: transform .15s, border-color .15s, color .15s;
+  }
+  .socials a:hover { transform: translateY(-2px); border-color: var(--accent); color: var(--accent); }
+  h2 {
+    font-size: .75rem; text-transform: uppercase; letter-spacing: .12em;
+    color: var(--muted); font-weight: 600; margin: 28px 4px 10px;
+  }
+  .links { display: flex; flex-direction: column; gap: 10px; }
+  .link {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 16px; border-radius: 14px;
+    background: var(--card); border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    color: var(--text); text-decoration: none;
+    transition: transform .15s, border-color .15s;
+  }
+  .link:hover { transform: translateY(-2px); border-color: var(--accent); }
+  .link i.icon { width: 22px; text-align: center; font-size: 1.15rem; }
+  .link .label { flex: 1; font-weight: 500; }
+  .link .handle { color: var(--muted); font-size: .85rem; }
+  .project {
+    display: block; padding: 18px; border-radius: 16px;
+    background: var(--card); border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    color: var(--text); text-decoration: none;
+    transition: transform .15s, border-color .15s;
+  }
+  .project:hover { transform: translateY(-2px); border-color: var(--accent); }
+  .project-top { display: flex; align-items: center; gap: 12px; }
+  .project-mark {
+    width: 44px; height: 44px; border-radius: 12px;
+    display: grid; place-items: center;
+    background: linear-gradient(135deg, #e7c26a, #b07d1f);
+    color: #fff; font-size: 1.3rem; font-weight: 700;
+  }
+  .project-title { font-weight: 600; font-size: 1.05rem; }
+  .project-sub { color: var(--muted); font-size: .85rem; }
+  .project p { margin-top: 12px; color: var(--muted); font-size: .92rem; line-height: 1.5; }
+  .tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 12px; }
+  .tags span {
+    font-size: .75rem; padding: 4px 10px; border-radius: 999px;
+    border: 1px solid var(--border); color: var(--muted);
+  }
+  footer { text-align: center; color: var(--muted); font-size: .8rem; margin-top: 36px; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <img class="avatar" src="https://github.com/sametackgz41.png" alt="Abdulsamet Açıkgöz">
+    <h1>Abdulsamet Açıkgöz</h1>
+    <p class="tagline">Yönetim Bilişim Sistemleri öğrencisi</p>
+    <nav class="socials" aria-label="Sosyal medya">
+      <a href="https://www.instagram.com/41samet49/" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://www.tiktok.com/@sametackgz0" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+      <a href="https://x.com/sametacikgoz41" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+      <a href="https://www.linkedin.com/in/abdulsamet-a%C3%A7%C4%B1kg%C3%B6z/" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+      <a href="https://github.com/sametackgz41" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+    </nav>
+  </header>
+
+  <h2>Projeler</h2>
+  <a class="project" href="https://sametackgz41.github.io/kinmichi/">
+    <div class="project-top">
+      <div class="project-mark">金</div>
+      <div>
+        <div class="project-title">Kinmichi</div>
+        <div class="project-sub">Android alışkanlık takipçisi</div>
+      </div>
+    </div>
+    <p>Sakin, açık kaynak bir alışkanlık uygulaması. Kötü gün versiyonları, "asla iki kez kaçırma" kuralı ve altınla onarılan geri dönüşler.</p>
+    <div class="tags"><span>Kotlin</span><span>Jetpack Compose</span><span>Wear OS</span><span>Açık kaynak</span></div>
+  </a>
+
+  <h2>Hesaplarım</h2>
+  <div class="links">
+    <a class="link" href="https://www.instagram.com/41samet49/"><i class="icon fa-brands fa-instagram"></i><span class="label">Instagram</span><span class="handle">@41samet49</span></a>
+    <a class="link" href="https://www.threads.net/@41samet49"><i class="icon fa-brands fa-threads"></i><span class="label">Threads</span><span class="handle">@41samet49</span></a>
+    <a class="link" href="https://www.tiktok.com/@sametackgz0"><i class="icon fa-brands fa-tiktok"></i><span class="label">TikTok</span><span class="handle">@sametackgz0</span></a>
+    <a class="link" href="https://x.com/sametacikgoz41"><i class="icon fa-brands fa-x-twitter"></i><span class="label">X</span><span class="handle">@sametacikgoz41</span></a>
+    <a class="link" href="https://www.linkedin.com/in/abdulsamet-a%C3%A7%C4%B1kg%C3%B6z/"><i class="icon fa-brands fa-linkedin-in"></i><span class="label">LinkedIn</span><span class="handle">Abdulsamet Açıkgöz</span></a>
+    <a class="link" href="https://github.com/sametackgz41"><i class="icon fa-brands fa-github"></i><span class="label">GitHub</span><span class="handle">sametackgz41</span></a>
+    <a class="link" href="mailto:41samet49@gmail.com"><i class="icon fa-solid fa-envelope"></i><span class="label">E-posta</span><span class="handle">41samet49@gmail.com</span></a>
+  </div>
+
+  <footer>© 2026 Abdulsamet Açıkgöz</footer>
+</main>
+</body>
+</html>
