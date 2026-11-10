@@ -613,7 +613,8 @@
       var start = g.scrollLeft;
       g.scrollBy({ left: dx, behavior: reduce ? 'auto' : 'smooth' });
       // Some browsers ignore smooth scrolling on this container; jump instead if nothing moved.
-      setTimeout(function () { if (Math.abs(g.scrollLeft - start) < 2) g.scrollLeft = start + dx; }, 350);
+      setTimeout(function () { if (Math.abs(g.scrollLeft - start) < 2) g.scrollLeft = start + dx; update(); }, 350);
+      setTimeout(update, 800);
     };
     prev.addEventListener('click', function () { go(-step()); });
     next.addEventListener('click', function () { go(step()); });
