@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+  (function () {
+    var r = document.documentElement;
+    try {
+      var t = localStorage.getItem('theme'); if (t) r.setAttribute('data-theme', t);
+      var l = localStorage.getItem('lang') || localStorage.getItem('kinmichi-lang');
+      if (!l) { var n = (navigator.languages && navigator.languages[0]) || navigator.language || 'en'; l = /^tr/i.test(n) ? 'tr' : 'en'; }
+      r.lang = (l === 'tr') ? 'tr' : 'en';
+    } catch (e) {}
+  })();
+</script>
+<title>Page not found · Abdulsamet Açıkgöz</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0e1014" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f4efe5" media="(prefers-color-scheme: light)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230e1014'/%3E%3Cpath d='M44 18a18 18 0 1 0 6 10' fill='none' stroke='%23d4ad57' stroke-width='6' stroke-linecap='round'/%3E%3Ccircle cx='48' cy='17' r='4' fill='%23d4ad57'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4efe5; --card: #fbf8f2; --text: #1b1e25; --muted: #686c75;
+    --line: #ddd4c3; --accent: #7d5f19; --accent-soft: rgba(168,130,44,.14);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0e1014; --card: #171a21; --text: #ece8df; --muted: #9a9ea8;
+      --line: #262a33; --accent: #d4ad57; --accent-soft: rgba(212,173,87,.12);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0e1014; --card: #171a21; --text: #ece8df; --muted: #9a9ea8;
+    --line: #262a33; --accent: #d4ad57; --accent-soft: rgba(212,173,87,.12);
+  }
+  * { box-sizing: border-box; margin: 0; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  body {
+    min-height: 100vh; min-height: 100dvh; display: grid; place-items: center; padding: 32px 20px;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+    background: radial-gradient(circle at 50% 32%, var(--accent-soft), transparent min(420px, 70vw)), var(--bg);
+    color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; text-align: center;
+  }
+  main { max-width: 30rem; }
+  .mark { width: 88px; height: 88px; margin: 0 auto 28px; color: var(--accent); }
+  .mark path { stroke-dasharray: 100; stroke-dashoffset: 100; animation: draw 1.4s .2s ease-out forwards; }
+  .mark circle { opacity: 0; animation: fade .4s 1.4s forwards; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  @keyframes fade { to { opacity: 1; } }
+  .code { font-size: .8rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+  h1 { font-family: Fraunces, Georgia, serif; font-optical-sizing: auto; font-weight: 600; font-size: clamp(2rem, 7vw, 2.8rem); line-height: 1.1; letter-spacing: -.015em; margin: 10px 0 14px; text-wrap: balance; }
+  p { text-wrap: pretty; }
+  p { color: var(--muted); }
+  .cta { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 30px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px; padding: 12px 20px; border-radius: 999px;
+    font-weight: 600; font-size: .95rem; text-decoration: none; border: 1px solid var(--line);
+    background: var(--card); color: var(--text); transition: transform .15s, border-color .15s, background .15s;
+  }
+  .btn:hover { transform: translateY(-2px); border-color: var(--accent); }
+  .btn.primary { background: var(--text); color: var(--bg); border-color: var(--text); }
+  .btn.primary:hover { background: var(--accent); border-color: var(--accent); }
+  [lang="en"] .tr, [lang="tr"] .en { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .mark path { animation: none; stroke-dashoffset: 0; }
+    .mark circle { animation: none; opacity: 1; }
+    .btn { transition: none; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <svg class="mark" viewBox="0 0 64 64" aria-hidden="true">
+    <path d="M44 18a18 18 0 1 0 6 10" pathLength="100" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="48" cy="17" r="3.5" fill="currentColor"/>
+  </svg>
+  <div class="code">404</div>
+  <h1><span class="en">This page wandered off</span><span class="tr">Bu sayfa yolunu kaybetmiş</span></h1>
+  <p>
+    <span class="en">The link may be old or mistyped. Everything else is still where you left it.</span>
+    <span class="tr">Bağlantı eski ya da yanlış yazılmış olabilir. Geri kalan her şey yerli yerinde.</span>
+  </p>
+  <div class="cta">
+    <a class="btn primary" href="/"><span class="en">Go to the home page</span><span class="tr">Ana sayfaya dön</span></a>
+    <a class="btn" href="/kinmichi/">Kinmichi</a>
+  </div>
+</main>
+<script>
+  if (document.documentElement.lang === 'tr') document.title = 'Sayfa bulunamadı · Abdulsamet Açıkgöz';
+</script>
+</body>
+</html>
