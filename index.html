@@ -608,8 +608,15 @@
       prev.disabled = g.scrollLeft <= 4;
       next.disabled = g.scrollLeft + g.clientWidth >= g.scrollWidth - 4;
     };
-    prev.addEventListener('click', function () { g.scrollBy({ left: -step(), behavior: 'smooth' }); });
-    next.addEventListener('click', function () { g.scrollBy({ left: step(), behavior: 'smooth' }); });
+    var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var go = function (dx) {
+      var start = g.scrollLeft;
+      g.scrollBy({ left: dx, behavior: reduce ? 'auto' : 'smooth' });
+      // Some browsers ignore smooth scrolling on this container; jump instead if nothing moved.
+      setTimeout(function () { if (Math.abs(g.scrollLeft - start) < 2) g.scrollLeft = start + dx; }, 350);
+    };
+    prev.addEventListener('click', function () { go(-step()); });
+    next.addEventListener('click', function () { go(step()); });
     g.addEventListener('scroll', update, { passive: true }); addEventListener('resize', update); update();
   })();
 
