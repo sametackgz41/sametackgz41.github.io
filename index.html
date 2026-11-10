@@ -3,6 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+  // Runs before paint: apply the saved theme (no flash) and enable scroll animations only when JS works.
+  (function () {
+    var r = document.documentElement; r.classList.add('js');
+    try { var t = localStorage.getItem('theme'); if (t) r.setAttribute('data-theme', t); } catch (e) {}
+  })();
+</script>
 <title>Abdulsamet Açıkgöz</title>
 <meta name="description" content="Abdulsamet Açıkgöz — Management Information Systems student at Bursa Uludağ University. Projects, interests and contact.">
 <meta property="og:type" content="website">
@@ -26,8 +33,8 @@
     --text: #1b1e25;
     --muted: #686c75;
     --line: #ddd4c3;
-    --accent: #a8822c;
-    --accent-soft: rgba(168,130,44,.12);
+    --accent: #7d5f19;
+    --accent-soft: rgba(168,130,44,.14);
     --ink: #1e2a44;
     --shadow: 0 1px 2px rgba(30,25,15,.05), 0 12px 32px -12px rgba(30,25,15,.18);
   }
@@ -60,6 +67,9 @@
 
   * { box-sizing: border-box; margin: 0; }
   html { scroll-behavior: smooth; }
+  section, header { scroll-margin-top: 72px; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   body {
     font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
     background: var(--bg);
@@ -93,7 +103,7 @@
   }
   .nav-links a:hover { color: var(--text); background: var(--accent-soft); }
   .theme-btn {
-    width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--line);
+    width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line);
     background: transparent; color: var(--text); cursor: pointer; margin-left: 6px;
     display: grid; place-items: center; font-size: .95rem;
   }
@@ -131,7 +141,7 @@
   }
   .btn:hover { transform: translateY(-2px); border-color: var(--accent); }
   .btn.primary { background: var(--text); color: var(--bg); border-color: var(--text); }
-  .btn.primary:hover { background: var(--accent); border-color: var(--accent); color: #111; }
+  .btn.primary:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
   .socials { display: flex; gap: 10px; margin-top: 26px; }
   .socials a {
     width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center;
@@ -235,11 +245,17 @@
   footer a:hover { color: var(--accent); }
 
   /* Reveal */
-  .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
-  .reveal.in { opacity: 1; transform: none; }
+  .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+  .js .reveal.in { opacity: 1; transform: none; }
+  .copy-line { margin-top: 18px; font-size: .88rem; color: var(--muted); }
+  .copy-btn {
+    background: none; border: 0; padding: 4px 6px; font: inherit; color: var(--text); cursor: pointer;
+    text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 3px; border-radius: 6px;
+  }
+  .copy-btn:hover { color: var(--accent); }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    .reveal { opacity: 1; transform: none; transition: none; }
+    .js .reveal { opacity: 1; transform: none; transition: none; }
     .btn, .socials a, .mini { transition: none; }
   }
 </style>
@@ -422,6 +438,7 @@
         <a class="btn" href="https://www.linkedin.com/in/abdulsametacikgoz/"><i class="fa-brands fa-linkedin-in"></i>LinkedIn</a>
         <a class="btn" href="https://linktr.ee/41samet49"><i class="fa-solid fa-link"></i>All links</a>
       </div>
+      <p class="copy-line">No mail app? <button class="copy-btn" id="copyBtn" type="button">Copy my email address</button><span class="sr-only" id="copyStatus" aria-live="polite"></span></p>
     </div>
   </div>
 </section>
@@ -436,22 +453,44 @@
 <script>
   // Email assembled at runtime so the address isn't in the page source for scrapers.
   (function () {
-    var u = '41samet49', d = 'gmail.com';
-    var b = document.getElementById('mailBtn');
-    b.href = 'mailto:' + u + '@' + d;
+    var addr = '41samet49' + '@' + 'gmail.com';
+    document.getElementById('mailBtn').href = 'mailto:' + addr;
+    var btn = document.getElementById('copyBtn'), status = document.getElementById('copyStatus');
+    btn.addEventListener('click', function () {
+      var done = function () {
+        btn.textContent = 'Copied: ' + addr; status.textContent = 'Email address copied';
+        setTimeout(function () { btn.textContent = 'Copy my email address'; status.textContent = ''; }, 2500);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(addr).then(done, function () { btn.textContent = addr; });
+      } else { btn.textContent = addr; }
+    });
   })();
 
-  // Theme toggle (remembered per browser).
+  // External links open in a new tab.
+  document.querySelectorAll('a[href^="http"]').forEach(function (a) {
+    if (a.hostname !== location.hostname) { a.target = '_blank'; a.rel = 'noopener'; }
+  });
+
+  // Theme toggle (remembered per browser); icon and label follow the current theme.
   (function () {
-    var root = document.documentElement, key = 'theme';
-    try { var saved = localStorage.getItem(key); if (saved) root.setAttribute('data-theme', saved); } catch (e) {}
-    document.getElementById('themeBtn').addEventListener('click', function () {
-      var current = root.getAttribute('data-theme') ||
-        (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-      var next = current === 'dark' ? 'light' : 'dark';
+    var root = document.documentElement, key = 'theme', btn = document.getElementById('themeBtn');
+    var current = function () {
+      return root.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    };
+    var paint = function () {
+      var dark = current() === 'dark';
+      btn.innerHTML = dark ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
+      btn.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
+    };
+    btn.addEventListener('click', function () {
+      var next = current() === 'dark' ? 'light' : 'dark';
       root.setAttribute('data-theme', next);
       try { localStorage.setItem(key, next); } catch (e) {}
+      paint();
     });
+    matchMedia('(prefers-color-scheme: dark)').addEventListener('change', paint);
+    paint();
   })();
 
   // Nav border on scroll.
