@@ -35,7 +35,7 @@
     "https://www.instagram.com/41samet49/",
     "https://x.com/sametacikgoz41",
     "https://www.threads.net/@41samet49",
-    "https://www.tiktok.com/@sametackgz0"
+    "https://www.tiktok.com/@sametackgz4"
   ]
 }
 </script>
@@ -124,8 +124,8 @@
   @media (max-width: 760px) { .enso { width: 380px; height: 380px; right: -170px; top: 0; opacity: .35; } }
   .hero-inner { position: relative; z-index: 1; display: grid; grid-template-columns: auto 1fr; gap: 36px; align-items: center; }
   @media (max-width: 760px) { .hero-inner { grid-template-columns: 1fr; gap: 24px; } }
-  .avatar { width: 148px; height: 148px; border-radius: 50%; object-fit: cover; border: 4px solid var(--card); box-shadow: 0 0 0 2px var(--accent), var(--shadow); }
-  @media (max-width: 760px) { .avatar { width: 112px; height: 112px; } }
+  .avatar { width: 160px; height: 192px; border-radius: 24px; object-fit: cover; object-position: 50% 30%; border: 1px solid var(--line); box-shadow: var(--shadow); }
+  @media (max-width: 760px) { .avatar { width: 120px; height: 144px; border-radius: 20px; } }
   .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: .8rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
   .eyebrow::before { content: ""; width: 22px; height: 1px; background: currentColor; }
   h1 { font-size: clamp(2.4rem, 6vw, 4rem); line-height: 1.05; letter-spacing: -.02em; margin: 14px 0 16px; font-weight: 600; }
@@ -142,13 +142,6 @@
   .btn:hover { transform: translateY(-2px); border-color: var(--accent); }
   .btn.primary { background: var(--text); color: var(--bg); border-color: var(--text); }
   .btn.primary:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
-  .socials { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
-  .socials a {
-    width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center;
-    border: 1px solid var(--line); color: var(--muted); text-decoration: none; font-size: 1.05rem;
-    transition: color .15s, border-color .15s, transform .15s;
-  }
-  .socials a:hover { color: var(--accent); border-color: var(--accent); transform: translateY(-2px); }
 
   /* Sections */
   section { padding: 72px 0; }
@@ -254,11 +247,30 @@
   .contact h2 { font-size: clamp(1.9rem, 4.5vw, 2.8rem); line-height: 1.1; letter-spacing: -.015em; font-weight: 600; margin: 12px 0 14px; }
   .contact p { color: var(--muted); max-width: 30em; margin: 0 auto 28px; }
   .contact .cta { justify-content: center; margin-top: 0; }
-  .contact .social-label { margin: 34px auto 0; font-size: .9rem; }
-  .contact .contact-socials { justify-content: center; margin-top: 12px; }
-  .copy-line { margin-top: 18px; font-size: .88rem; color: var(--muted); }
-  .copy-btn { background: none; border: 0; padding: 4px 6px; font: inherit; color: var(--text); cursor: pointer; text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 3px; border-radius: 6px; }
-  .copy-btn:hover { color: var(--accent); }
+  .contact .social-label { margin: 36px auto 0; font-size: .9rem; }
+  .social-chips { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 14px; }
+  .social-chips a {
+    display: inline-flex; align-items: center; gap: 9px; padding: 9px 15px 9px 12px; border-radius: 999px;
+    border: 1px solid var(--line); background: var(--bg); color: var(--text); text-decoration: none; font-size: .9rem; font-weight: 500;
+    transition: border-color .15s, transform .15s;
+  }
+  .social-chips a i { width: 18px; text-align: center; color: var(--muted); font-size: 1rem; transition: color .15s; }
+  .social-chips a:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .social-chips a:hover i { color: var(--accent); }
+  .mail-wrap { position: relative; display: inline-flex; }
+  .mail-menu {
+    position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%); z-index: 20;
+    min-width: 276px; padding: 8px; border-radius: 18px; text-align: left;
+    background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow);
+  }
+  .mail-menu[hidden] { display: none; }
+  .mail-addr { display: block; padding: 8px 12px 10px; font-size: .82rem; color: var(--muted); border-bottom: 1px solid var(--line); margin-bottom: 6px; white-space: nowrap; }
+  .mail-menu a, .mail-menu button {
+    display: flex; align-items: center; gap: 12px; width: 100%; padding: 10px 12px; border-radius: 12px; border: 0;
+    background: none; color: var(--text); font: inherit; font-size: .92rem; font-weight: 500; text-decoration: none; cursor: pointer; text-align: left;
+  }
+  .mail-menu a:hover, .mail-menu button:hover, .mail-menu a:focus-visible, .mail-menu button:focus-visible { background: var(--accent-soft); }
+  .mail-menu i { width: 18px; text-align: center; color: var(--accent); }
 
   footer { padding: 36px 0 48px; color: var(--muted); font-size: .85rem; }
   footer .wrap { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: center; }
@@ -271,7 +283,7 @@
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .js .reveal { opacity: 1; transform: none; transition: none; }
-    .btn, .socials a, .side { transition: none; }
+    .btn, .social-chips a, .side { transition: none; }
   }
 </style>
 </head>
@@ -303,24 +315,16 @@
     <div class="hero-inner">
       <img class="avatar reveal" src="assets/avatar.jpg" alt="Abdulsamet Açıkgöz" width="148" height="148">
       <div class="reveal">
-        <span class="eyebrow" data-i18n="hero_hello">Hello, I'm</span>
+        <span class="eyebrow" data-i18n="hero_hello">Hi, I'm</span>
         <h1 class="serif">Abdulsamet Açıkgöz</h1>
-        <p class="lead" data-i18n-html="hero_lead">Management Information Systems student at <strong>Bursa Uludağ University</strong>, interested in artificial intelligence and building small, thoughtful software along the way.</p>
+        <p class="lead" data-i18n-html="hero_lead">I study Management Information Systems at <strong>Bursa Uludağ University</strong>. I'm into AI, and in my free time I build apps I actually want to use myself.</p>
         <div class="meta">
           <span><i class="fa-solid fa-location-dot"></i>Kocaeli, Türkiye</span>
           <span><i class="fa-solid fa-graduation-cap"></i><span data-i18n="hero_meta_uni">MIS · Bursa Uludağ University</span></span>
         </div>
         <div class="cta">
-          <a class="btn primary" href="#kinmichi"><i class="fa-solid fa-arrow-down"></i><span data-i18n="hero_cta_work">See my work</span></a>
+          <a class="btn primary" href="#kinmichi"><i class="fa-solid fa-arrow-down"></i><span data-i18n="hero_cta_work">My projects</span></a>
           <a class="btn" href="#contact"><i class="fa-regular fa-paper-plane"></i><span data-i18n="hero_cta_contact">Get in touch</span></a>
-        </div>
-        <div class="socials" aria-label="Social profiles">
-          <a href="https://www.linkedin.com/in/abdulsametacikgoz/" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-          <a href="https://github.com/sametackgz41" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-          <a href="https://www.instagram.com/41samet49/" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-          <a href="https://x.com/sametacikgoz41" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
-          <a href="https://www.threads.net/@41samet49" aria-label="Threads"><i class="fa-brands fa-threads"></i></a>
-          <a href="https://www.tiktok.com/@sametackgz0" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
         </div>
       </div>
     </div>
@@ -331,12 +335,12 @@
   <div class="wrap">
     <div class="section-head reveal">
       <span class="eyebrow" data-i18n="about_tag">About</span>
-      <h2 class="serif" data-i18n="about_title">Where business meets technology</h2>
+      <h2 class="serif" data-i18n="about_title">A bit about me</h2>
     </div>
     <div class="about">
       <div class="reveal">
-        <p data-i18n-html="about_p1">I study <strong>Management Information Systems</strong>, the field that sits between how organizations work and the technology that runs them. I'm especially drawn to <strong>artificial intelligence</strong>: how AI can make information systems smarter, and how people can put it to work in everyday tools.</p>
-        <p data-i18n-html="about_p2">Outside of class I like turning ideas into working products. My biggest one so far is <strong>Kinmichi</strong>, an open-source habit tracker for Android that I design, build and ship myself.</p>
+        <p data-i18n-html="about_p1">My department sits between business and software: how companies run, and the systems behind them. What pulls me in most is <strong>artificial intelligence</strong>, especially the everyday side of it, like tools that save people time.</p>
+        <p data-i18n-html="about_p2">I like learning by building things. My biggest project so far is <strong>Kinmichi</strong>, a habit tracker for Android that I design and code on my own. It's free and open source.</p>
       </div>
       <div class="facts reveal">
         <div class="fact"><i class="fa-solid fa-graduation-cap"></i><div><small data-i18n="fact_study_l">Studying</small><span data-i18n="fact_study">Management Information Systems</span></div></div>
@@ -352,7 +356,7 @@
   <div class="wrap">
     <div class="section-head reveal">
       <span class="eyebrow" data-i18n="feat_tag">Featured project</span>
-      <h2 class="serif" data-i18n="feat_title">My main project</h2>
+      <h2 class="serif" data-i18n="feat_title">What I'm working on</h2>
     </div>
 
     <article class="feature reveal">
@@ -364,12 +368,12 @@
             <span class="kanji" data-i18n="k_kanji">金道 · the golden path</span>
           </div>
         </div>
-        <p class="desc" data-i18n="k_desc">A calm, open-source habit tracker for Android, built around the day after you slip, not the perfect streak. Every habit gets a bad-day version, a missed day is followed by a "never miss twice" nudge, and comebacks are drawn in gold.</p>
+        <p class="desc" data-i18n="k_desc">A habit tracker that doesn't punish you for missing a day. Every habit has an easier "bad day" version, and if you skip one, the app reminds you not to skip twice. When you get back on track, the comeback shows up in gold.</p>
         <ul class="highlights">
           <li><i class="fa-solid fa-feather-pointed"></i><span data-i18n="k_h1">Material You design with seven palettes, light and dark</span></li>
           <li><i class="fa-solid fa-mobile-screen-button"></i><span data-i18n="k_h2">Home-screen widgets and a Wear OS tile and watch app</span></li>
-          <li><i class="fa-solid fa-language"></i><span data-i18n="k_h3">10 languages, with Google, GitHub and guest sign-in</span></li>
-          <li><i class="fa-solid fa-lock-open"></i><span data-i18n="k_h4">Free and open source under the MIT license, no ads</span></li>
+          <li><i class="fa-solid fa-language"></i><span data-i18n="k_h3">10 languages; sign in with Google, GitHub or as a guest</span></li>
+          <li><i class="fa-solid fa-lock-open"></i><span data-i18n="k_h4">Free, open source (MIT) and ad-free</span></li>
         </ul>
         <div class="tags"><span>Kotlin</span><span>Jetpack Compose</span><span>Wear OS</span><span>Firebase</span><span data-i18n="tag_os">Open source</span></div>
         <div class="links">
@@ -385,7 +389,7 @@
     </article>
 
     <div class="gallery-head reveal">
-      <h4 data-i18n="gal_title">A look inside</h4>
+      <h4 data-i18n="gal_title">Screenshots</h4>
       <div class="gallery-nav">
         <button type="button" id="galPrev" aria-label="Previous screenshots"><i class="fa-solid fa-arrow-left"></i></button>
         <button type="button" id="galNext" aria-label="Next screenshots"><i class="fa-solid fa-arrow-right"></i></button>
@@ -405,7 +409,7 @@
       <figure class="shot"><div class="frame"><img class="k-img" data-light="feat_alarm" data-dark="feat_alarm_dark" alt="" width="720" height="871" loading="lazy"></div>
         <figcaption><b data-i18n="g6_t">Wake-up alarm</b><span data-i18n="g6_d">A real alarm you turn off by solving small tasks</span></figcaption></figure>
     </div>
-    <a class="more-link reveal" href="/kinmichi/"><span data-i18n="more_k">Everything about Kinmichi on its own site</span> <i class="fa-solid fa-arrow-right"></i></a>
+    <a class="more-link reveal" href="/kinmichi/"><span data-i18n="more_k">More on Kinmichi's own site</span> <i class="fa-solid fa-arrow-right"></i></a>
   </div>
 </section>
 
@@ -413,14 +417,14 @@
   <div class="wrap">
     <div class="section-head reveal">
       <span class="eyebrow" data-i18n="side_tag">Side projects</span>
-      <h2 class="serif" data-i18n="side_title">Smaller things I've built</h2>
+      <h2 class="serif" data-i18n="side_title">Smaller projects</h2>
     </div>
     <div class="side-grid">
       <article class="side reveal">
         <div class="thumb"><img src="assets/kampusag.png" alt="KampüsAğ sign-in page" width="800" height="720" loading="lazy"></div>
         <div class="body">
           <h4>KampüsAğ</h4>
-          <p data-i18n="s1_d">A university community platform for students, alumni and administrators, built during an R&amp;D camp: events, career guidance and note sharing.</p>
+          <p data-i18n="s1_d">A community platform for students, alumni and university staff that I built at an R&amp;D camp: events, career advice and shared notes.</p>
           <div class="row">
             <small><i class="fa-brands fa-react"></i>React · Vite</small>
             <div class="side-links">
@@ -434,7 +438,7 @@
         <div class="thumb icon"><i class="fa-solid fa-book-open"></i></div>
         <div class="body">
           <h4>lnreader-plugins-tr</h4>
-          <p data-i18n="s2_d">Turkish source plugins for LNReader, an open-source light novel reader app.</p>
+          <p data-i18n="s2_d">Turkish sources for LNReader, an open-source app for reading light novels.</p>
           <div class="row">
             <small><i class="fa-brands fa-js"></i>JavaScript</small>
             <div class="side-links">
@@ -447,7 +451,7 @@
         <div class="thumb icon"><i class="fa-solid fa-file-zipper"></i></div>
         <div class="body">
           <h4>novel-compiler</h4>
-          <p data-i18n="s3_d">A web novel reader that compiles chapters into EPUB files for offline reading.</p>
+          <p data-i18n="s3_d">Gathers web novel chapters into an EPUB so you can read them offline.</p>
           <div class="row">
             <small><i class="fa-brands fa-node-js"></i>Node.js · Express</small>
             <div class="side-links">
@@ -464,7 +468,7 @@
   <div class="wrap">
     <div class="section-head reveal">
       <span class="eyebrow" data-i18n="tool_tag">Toolkit</span>
-      <h2 class="serif" data-i18n="tool_title">What I work with</h2>
+      <h2 class="serif" data-i18n="tool_title">Tools I use</h2>
     </div>
     <div class="toolkit">
       <div class="tool-group reveal">
@@ -487,20 +491,29 @@
   <div class="wrap">
     <div class="contact reveal">
       <span class="eyebrow" data-i18n="c_tag">Contact</span>
-      <h2 class="serif" data-i18n="c_title">Let's connect</h2>
-      <p data-i18n="c_lead">Open to internships, collaborations and good conversations about technology. The fastest way to reach me is email or LinkedIn.</p>
+      <h2 class="serif" data-i18n="c_title">Get in touch</h2>
+      <p data-i18n="c_lead">I'm open to internships and joint projects, and always up for a chat about tech. Email is the quickest way to reach me.</p>
       <div class="cta">
-        <a class="btn primary" id="mailBtn" href="#contact"><i class="fa-regular fa-envelope"></i><span data-i18n="c_email">Email me</span></a>
+        <div class="mail-wrap">
+          <button class="btn primary" id="mailBtn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="mailMenu"><i class="fa-regular fa-envelope"></i><span data-i18n="c_email">Email me</span></button>
+          <div class="mail-menu" id="mailMenu" hidden>
+            <span class="mail-addr" id="mailAddr"></span>
+            <a id="mGmail" href="#contact"><i class="fa-brands fa-google"></i>Gmail</a>
+            <a id="mOutlook" href="#contact"><i class="fa-brands fa-microsoft"></i>Outlook</a>
+            <a id="mApp" href="#contact"><i class="fa-regular fa-envelope"></i><span data-i18n="m_app">Mail app</span></a>
+            <button type="button" id="copyBtn"><i class="fa-regular fa-copy"></i><span id="copyLabel" data-i18n="c_copy">Copy address</span></button>
+          </div>
+        </div>
         <a class="btn" href="https://www.linkedin.com/in/abdulsametacikgoz/"><i class="fa-brands fa-linkedin-in"></i>LinkedIn</a>
         <a class="btn" href="https://github.com/sametackgz41"><i class="fa-brands fa-github"></i>GitHub</a>
       </div>
-      <p class="copy-line"><span data-i18n="c_nomail">No mail app?</span> <button class="copy-btn" id="copyBtn" type="button" data-i18n="c_copy">Copy my email address</button><span class="sr-only" id="copyStatus" aria-live="polite"></span></p>
-      <p class="social-label" data-i18n="c_social">Also on social media</p>
-      <div class="socials contact-socials" aria-label="Social media">
-        <a href="https://www.instagram.com/41samet49/" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-        <a href="https://www.threads.net/@41samet49" aria-label="Threads"><i class="fa-brands fa-threads"></i></a>
-        <a href="https://x.com/sametacikgoz41" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
-        <a href="https://www.tiktok.com/@sametackgz0" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+      <span class="sr-only" id="copyStatus" aria-live="polite"></span>
+      <p class="social-label" data-i18n="c_social">You can also find me here</p>
+      <div class="social-chips" aria-label="Social media">
+        <a href="https://www.instagram.com/41samet49/"><i class="fa-brands fa-instagram"></i><span>Instagram</span></a>
+        <a href="https://www.threads.net/@41samet49"><i class="fa-brands fa-threads"></i><span>Threads</span></a>
+        <a href="https://x.com/sametacikgoz41"><i class="fa-brands fa-x-twitter"></i><span>X</span></a>
+        <a href="https://www.tiktok.com/@sametackgz4"><i class="fa-brands fa-tiktok"></i><span>TikTok</span></a>
       </div>
     </div>
   </div>
@@ -517,46 +530,46 @@
   var I18N_TR = {
     nav_about: 'Hakkımda', nav_side: 'Yan projeler', nav_contact: 'İletişim',
     hero_hello: 'Merhaba, ben',
-    hero_lead: '<strong>Bursa Uludağ Üniversitesi</strong>\'nde Yönetim Bilişim Sistemleri öğrencisiyim. Yapay zekaya ilgi duyuyor, bu yolda küçük ve özenli yazılımlar geliştiriyorum.',
+    hero_lead: '<strong>Bursa Uludağ Üniversitesi</strong>\'nde Yönetim Bilişim Sistemleri okuyorum. Yapay zekayla ilgileniyorum, boş zamanlarımda da kendi kullanmak isteyeceğim uygulamalar yapıyorum.',
     hero_meta_uni: 'YBS · Bursa Uludağ Üniversitesi',
-    hero_cta_work: 'Çalışmalarım', hero_cta_contact: 'İletişime geç',
-    about_tag: 'Hakkımda', about_title: 'İş dünyası ile teknolojinin buluştuğu yer',
-    about_p1: '<strong>Yönetim Bilişim Sistemleri</strong> okuyorum: kurumların işleyişi ile onları ayakta tutan teknolojinin kesiştiği bir alan. En çok <strong>yapay zekaya</strong> ilgi duyuyorum: bilgi sistemlerini nasıl daha akıllı hâle getirebileceğine ve insanların onu günlük araçlarda nasıl kullanabileceğine.',
-    about_p2: 'Derslerin dışında fikirleri çalışan ürünlere dönüştürmeyi seviyorum. Şimdiye kadarki en büyük projem, kendim tasarlayıp geliştirdiğim ve yayınladığım açık kaynak Android alışkanlık uygulaması <strong>Kinmichi</strong>.',
+    hero_cta_work: 'Projelerim', hero_cta_contact: 'Bana yaz',
+    about_tag: 'Hakkımda', about_title: 'Kısaca ben',
+    about_p1: 'Bölümüm işletme ile yazılımın arasında bir yerde duruyor: şirketlerin nasıl işlediği ve bunun arkasındaki sistemler. Beni en çok çeken konu <strong>yapay zeka</strong>, özellikle de gündelik hayattaki tarafı; insanlara zaman kazandıran araçlar gibi.',
+    about_p2: 'Bir şeyler yaparak öğrenmeyi seviyorum. Şimdiye kadarki en büyük projem <strong>Kinmichi</strong>: tasarımından koduna kadar tek başıma geliştirdiğim bir Android alışkanlık uygulaması. Ücretsiz ve açık kaynak.',
     fact_study_l: 'Bölüm', fact_study: 'Yönetim Bilişim Sistemleri',
     fact_uni_l: 'Üniversite', fact_uni: 'Bursa Uludağ Üniversitesi',
     fact_int_l: 'İlgi alanları', fact_int: 'Yapay zeka · Veri · Bilgi sistemleri',
     fact_loc_l: 'Konum',
-    feat_tag: 'Öne çıkan proje', feat_title: 'Ana projem',
+    feat_tag: 'Öne çıkan proje', feat_title: 'Üzerinde çalıştığım proje',
     k_kanji: '金道 · altın yol',
-    k_desc: 'Kusursuz seriye değil, kaçırdığın günün ertesine odaklanan sakin, açık kaynak bir Android alışkanlık uygulaması. Her alışkanlığın bir kötü gün versiyonu var, kaçırılan günün ardından "asla iki kez kaçırma" hatırlatması geliyor ve geri dönüşler altınla çiziliyor.',
+    k_desc: 'Bir günü kaçırdın diye seni cezalandırmayan bir alışkanlık uygulaması. Her alışkanlığın daha kolay bir "kötü gün" versiyonu var; bir gün kaçırırsan uygulama ikincisini kaçırmaman için hatırlatıyor. Yeniden başladığında da bu dönüş altın renkle görünüyor.',
     k_h1: 'Yedi renk paleti, açık ve koyu temayla Material You tasarımı',
     k_h2: 'Ana ekran widget\'ları, Wear OS kutucuğu ve saat uygulaması',
-    k_h3: '10 dil; Google, GitHub ve misafir girişi',
-    k_h4: 'MIT lisanslı, ücretsiz ve açık kaynak; reklam yok',
+    k_h3: '10 dil; Google, GitHub ya da misafir olarak giriş',
+    k_h4: 'Ücretsiz, açık kaynak (MIT) ve reklamsız',
     tag_os: 'Açık kaynak',
     btn_site: 'Web sitesi', btn_download: 'İndir', btn_source: 'Kaynak kod',
-    gal_title: 'Uygulamanın içinden',
+    gal_title: 'Ekran görüntüleri',
     g1_t: 'Bugün', g1_d: 'Günlük ilerleme, seriler ve tek dokunuşla işaretleme',
     g2_t: 'İlerleme', g2_d: 'Haftalık skor, tamamlama oranı ve eğilimler',
     g3_t: 'Alışkanlık detayı', g3_d: 'Bir alışkanlığın bütün yılı tek bakışta',
     g4_t: 'Alışkanlık ekleme', g4_d: 'Kötü gün versiyonuyla adım adım alışkanlık ekleme',
     g5_t: 'Widget\'lar', g5_d: 'Bugün\'den mini ısı haritasına sekiz ana ekran widget\'ı',
     g6_t: 'Uyandıran alarm', g6_d: 'Küçük görevleri çözerek kapattığın gerçek bir alarm',
-    more_k: 'Kinmichi hakkında her şey kendi sitesinde',
-    side_tag: 'Yan projeler', side_title: 'Geliştirdiğim küçük projeler',
-    s1_d: 'Bir Ar-Ge kampında geliştirdiğim; öğrencileri, mezunları ve yöneticileri buluşturan üniversite topluluk platformu: etkinlikler, kariyer rehberliği ve not paylaşımı.',
-    s2_d: 'Açık kaynak hafif roman okuma uygulaması LNReader için Türkçe kaynak eklentileri.',
-    s3_d: 'Bölümleri çevrimdışı okumak için EPUB dosyasına derleyen bir web roman okuyucusu.',
-    tool_tag: 'Araçlar', tool_title: 'Neyle çalışıyorum', tool_mobile: 'Mobil', tool_other: 'Diğer',
+    more_k: 'Kinmichi\'nin kendi sitesinde daha fazlası',
+    side_tag: 'Yan projeler', side_title: 'Küçük projeler',
+    s1_d: 'Bir Ar-Ge kampında geliştirdiğim; öğrenciler, mezunlar ve üniversite yönetimi için bir topluluk platformu: etkinlikler, kariyer tavsiyeleri ve not paylaşımı.',
+    s2_d: 'Hafif roman okuma uygulaması LNReader için Türkçe kaynaklar.',
+    s3_d: 'Web romanlarının bölümlerini toplayıp çevrimdışı okumak için EPUB\'a çeviriyor.',
+    tool_tag: 'Araçlar', tool_title: 'Kullandığım araçlar', tool_mobile: 'Mobil', tool_other: 'Diğer',
     c_tag: 'İletişim', c_title: 'Tanışalım',
-    c_lead: 'Staj, iş birliği ve teknoloji üzerine güzel sohbetlere açığım. Bana en hızlı e-posta veya LinkedIn üzerinden ulaşabilirsin.',
-    c_email: 'E-posta gönder', c_social: 'Sosyal medyada da buradayım', c_nomail: 'Mail uygulaman yok mu?', c_copy: 'E-posta adresimi kopyala',
+    c_lead: 'Staja ve ortak projelere açığım, teknoloji üzerine sohbet etmeyi de severim. Bana en hızlı e-postayla ulaşırsın.',
+    c_email: 'E-posta gönder', c_social: 'Beni burada da bulabilirsin', m_app: 'Mail uygulaması', c_copy: 'Adresi kopyala',
     back_top: 'Başa dön'
   };
   var UI = {
-    en: { toTr: 'Türkçe\'ye geç', toLight: 'Switch to light theme', toDark: 'Switch to dark theme', copied: 'Copied: ', copiedSr: 'Email address copied', copy: 'Copy my email address' },
-    tr: { toEn: 'Switch to English', toLight: 'Açık temaya geç', toDark: 'Koyu temaya geç', copied: 'Kopyalandı: ', copiedSr: 'E-posta adresi kopyalandı', copy: 'E-posta adresimi kopyala' }
+    en: { toTr: 'Türkçe\'ye geç', toLight: 'Switch to light theme', toDark: 'Switch to dark theme', copied: 'Copied: ', copiedSr: 'Email address copied', copy: 'Copy address' },
+    tr: { toEn: 'Switch to English', toLight: 'Açık temaya geç', toDark: 'Koyu temaya geç', copied: 'Kopyalandı: ', copiedSr: 'E-posta adresi kopyalandı', copy: 'Adresi kopyala' }
   };
   var root = document.documentElement;
   var lang = function () { return root.lang === 'tr' ? 'tr' : 'en'; };
@@ -611,18 +624,32 @@
   matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () { paintTheme(); paintShots(); });
 
   // Email assembled at runtime so the address isn't in the page source for scrapers.
+  // A plain mailto: link does nothing on computers without a mail app, so the button opens a small menu instead.
   (function () {
     var addr = 'contact' + '@' + 'abdulsametacikgoz.com';
-    document.getElementById('mailBtn').href = 'mailto:' + addr;
-    var btn = document.getElementById('copyBtn'), status = document.getElementById('copyStatus');
-    btn.addEventListener('click', function () {
+    var btn = document.getElementById('mailBtn'), menu = document.getElementById('mailMenu');
+    document.getElementById('mailAddr').textContent = addr;
+    document.getElementById('mGmail').href = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + addr;
+    document.getElementById('mOutlook').href = 'https://outlook.live.com/mail/0/deeplink/compose?to=' + addr;
+    document.getElementById('mApp').href = 'mailto:' + addr;
+    var open = function (on) {
+      menu.hidden = !on; btn.setAttribute('aria-expanded', on ? 'true' : 'false');
+      if (on) { var first = menu.querySelector('a, button'); if (first) first.focus(); }
+    };
+    btn.addEventListener('click', function (e) { e.stopPropagation(); open(menu.hidden); });
+    document.addEventListener('click', function (e) { if (!menu.hidden && !menu.contains(e.target)) open(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !menu.hidden) { open(false); btn.focus(); } });
+    menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setTimeout(function () { open(false); }, 150); }); });
+
+    var copy = document.getElementById('copyBtn'), label = document.getElementById('copyLabel'), status = document.getElementById('copyStatus');
+    copy.addEventListener('click', function () {
       var t = UI[lang()];
       var done = function () {
-        btn.textContent = t.copied + addr; status.textContent = t.copiedSr;
-        setTimeout(function () { btn.textContent = UI[lang()].copy; status.textContent = ''; }, 2500);
+        label.textContent = t.copied + addr; status.textContent = t.copiedSr;
+        setTimeout(function () { label.textContent = UI[lang()].copy; status.textContent = ''; }, 2500);
       };
-      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(addr).then(done, function () { btn.textContent = addr; });
-      else btn.textContent = addr;
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(addr).then(done, function () { label.textContent = addr; });
+      else label.textContent = addr;
     });
   })();
 
