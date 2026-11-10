@@ -232,6 +232,8 @@
   .contact h2 { font-size: clamp(1.9rem, 4.5vw, 2.8rem); line-height: 1.1; letter-spacing: -.015em; font-weight: 600; margin: 12px 0 14px; }
   .contact p { color: var(--muted); max-width: 30em; margin: 0 auto 28px; }
   .contact .cta { justify-content: center; margin-top: 0; }
+  .contact .social-label { margin: 34px auto 0; font-size: .9rem; }
+  .contact .contact-socials { justify-content: center; margin-top: 12px; }
   .copy-line { margin-top: 18px; font-size: .88rem; color: var(--muted); }
   .copy-btn { background: none; border: 0; padding: 4px 6px; font: inherit; color: var(--text); cursor: pointer; text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 3px; border-radius: 6px; }
   .copy-btn:hover { color: var(--accent); }
@@ -468,9 +470,16 @@
       <div class="cta">
         <a class="btn primary" id="mailBtn" href="#contact"><i class="fa-regular fa-envelope"></i><span data-i18n="c_email">Email me</span></a>
         <a class="btn" href="https://www.linkedin.com/in/abdulsametacikgoz/"><i class="fa-brands fa-linkedin-in"></i>LinkedIn</a>
-        <a class="btn" href="https://linktr.ee/41samet49"><i class="fa-solid fa-link"></i><span data-i18n="c_links">All links</span></a>
+        <a class="btn" href="https://github.com/sametackgz41"><i class="fa-brands fa-github"></i>GitHub</a>
       </div>
       <p class="copy-line"><span data-i18n="c_nomail">No mail app?</span> <button class="copy-btn" id="copyBtn" type="button" data-i18n="c_copy">Copy my email address</button><span class="sr-only" id="copyStatus" aria-live="polite"></span></p>
+      <p class="social-label" data-i18n="c_social">Also on social media</p>
+      <div class="socials contact-socials" aria-label="Social media">
+        <a href="https://www.instagram.com/41samet49/" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://www.threads.net/@41samet49" aria-label="Threads"><i class="fa-brands fa-threads"></i></a>
+        <a href="https://x.com/sametacikgoz41" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="https://www.tiktok.com/@sametackgz0" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+      </div>
     </div>
   </div>
 </section>
@@ -520,7 +529,7 @@
     tool_tag: 'Araçlar', tool_title: 'Neyle çalışıyorum', tool_mobile: 'Mobil', tool_other: 'Diğer',
     c_tag: 'İletişim', c_title: 'Tanışalım',
     c_lead: 'Staj, iş birliği ve teknoloji üzerine güzel sohbetlere açığım. Bana en hızlı e-posta veya LinkedIn üzerinden ulaşabilirsin.',
-    c_email: 'E-posta gönder', c_links: 'Tüm linkler', c_nomail: 'Mail uygulaman yok mu?', c_copy: 'E-posta adresimi kopyala',
+    c_email: 'E-posta gönder', c_social: 'Sosyal medyada da buradayım', c_nomail: 'Mail uygulaman yok mu?', c_copy: 'E-posta adresimi kopyala',
     back_top: 'Başa dön'
   };
   var UI = {
