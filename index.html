@@ -4,14 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>
-  // Runs before paint: apply the saved theme (no flash) and enable scroll animations only when JS works.
+  // Runs before paint: theme (no flash), language, and whether scroll animations are on.
   (function () {
     var r = document.documentElement; r.classList.add('js');
-    try { var t = localStorage.getItem('theme'); if (t) r.setAttribute('data-theme', t); } catch (e) {}
+    try {
+      var t = localStorage.getItem('theme'); if (t) r.setAttribute('data-theme', t);
+      var l = localStorage.getItem('lang') || localStorage.getItem('kinmichi-lang');
+      if (!l) { var n = (navigator.languages && navigator.languages[0]) || navigator.language || 'en'; l = /^tr/i.test(n) ? 'tr' : 'en'; }
+      r.lang = (l === 'tr') ? 'tr' : 'en';
+    } catch (e) {}
   })();
 </script>
 <title>Abdulsamet Açıkgöz</title>
-<meta name="description" content="Abdulsamet Açıkgöz — Management Information Systems student at Bursa Uludağ University. Projects, interests and contact.">
+<meta name="description" content="Abdulsamet Açıkgöz — Management Information Systems student at Bursa Uludağ University, interested in AI. Builder of Kinmichi.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://sametackgz41.github.io/">
 <meta property="og:title" content="Abdulsamet Açıkgöz">
@@ -35,33 +40,18 @@
     --line: #ddd4c3;
     --accent: #7d5f19;
     --accent-soft: rgba(168,130,44,.14);
-    --ink: #1e2a44;
     --shadow: 0 1px 2px rgba(30,25,15,.05), 0 12px 32px -12px rgba(30,25,15,.18);
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --bg: #0e1014;
-      --bg-2: #14171d;
-      --card: #171a21;
-      --text: #ece8df;
-      --muted: #9a9ea8;
-      --line: #262a33;
-      --accent: #d4ad57;
-      --accent-soft: rgba(212,173,87,.12);
-      --ink: #c9d3ea;
+      --bg: #0e1014; --bg-2: #14171d; --card: #171a21; --text: #ece8df; --muted: #9a9ea8;
+      --line: #262a33; --accent: #d4ad57; --accent-soft: rgba(212,173,87,.12);
       --shadow: 0 1px 2px rgba(0,0,0,.4), 0 16px 40px -16px rgba(0,0,0,.6);
     }
   }
   :root[data-theme="dark"] {
-    --bg: #0e1014;
-    --bg-2: #14171d;
-    --card: #171a21;
-    --text: #ece8df;
-    --muted: #9a9ea8;
-    --line: #262a33;
-    --accent: #d4ad57;
-    --accent-soft: rgba(212,173,87,.12);
-    --ink: #c9d3ea;
+    --bg: #0e1014; --bg-2: #14171d; --card: #171a21; --text: #ece8df; --muted: #9a9ea8;
+    --line: #262a33; --accent: #d4ad57; --accent-soft: rgba(212,173,87,.12);
     --shadow: 0 1px 2px rgba(0,0,0,.4), 0 16px 40px -16px rgba(0,0,0,.6);
   }
 
@@ -72,11 +62,8 @@
   .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   body {
     font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
+    background: var(--bg); color: var(--text); line-height: 1.6;
+    -webkit-font-smoothing: antialiased; overflow-x: hidden;
   }
   a { color: inherit; }
   img { display: block; max-width: 100%; height: auto; }
@@ -86,47 +73,38 @@
   /* Nav */
   nav {
     position: sticky; top: 0; z-index: 10;
-    backdrop-filter: saturate(1.4) blur(12px);
-    -webkit-backdrop-filter: saturate(1.4) blur(12px);
+    backdrop-filter: saturate(1.4) blur(12px); -webkit-backdrop-filter: saturate(1.4) blur(12px);
     background: color-mix(in srgb, var(--bg) 78%, transparent);
-    border-bottom: 1px solid transparent;
-    transition: border-color .2s;
+    border-bottom: 1px solid transparent; transition: border-color .2s;
   }
   nav.scrolled { border-bottom-color: var(--line); }
-  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 8px; }
   .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 600; letter-spacing: -.01em; }
-  .brand svg { width: 26px; height: 26px; }
-  .nav-links { display: flex; align-items: center; gap: 4px; }
+  .brand svg { width: 26px; height: 26px; flex: none; }
+  .nav-links { display: flex; align-items: center; gap: 2px; }
   .nav-links a {
     text-decoration: none; color: var(--muted); font-size: .92rem;
-    padding: 8px 12px; border-radius: 999px; transition: color .15s, background .15s;
+    padding: 8px 12px; border-radius: 999px; transition: color .15s, background .15s; white-space: nowrap;
   }
   .nav-links a:hover { color: var(--text); background: var(--accent-soft); }
-  .theme-btn {
-    width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line);
+  .icon-btn {
+    height: 44px; min-width: 44px; padding: 0 10px; border-radius: 999px; border: 1px solid var(--line);
     background: transparent; color: var(--text); cursor: pointer; margin-left: 6px;
-    display: grid; place-items: center; font-size: .95rem;
+    display: grid; place-items: center; font: 600 .82rem Inter, sans-serif; letter-spacing: .04em;
   }
-  @media (max-width: 600px) { .nav-links a.hide-sm { display: none; } }
+  .icon-btn:hover { border-color: var(--accent); }
+  @media (max-width: 760px) { .nav-links a.hide-md { display: none; } }
+  @media (max-width: 480px) { .nav-links a.hide-sm { display: none; } .brand span { display: none; } }
 
   /* Hero */
   .hero { position: relative; padding: 72px 0 88px; }
-  .enso {
-    position: absolute; right: -120px; top: -40px; width: 560px; height: 560px;
-    opacity: .5; pointer-events: none; z-index: 0;
-  }
+  .enso { position: absolute; right: -120px; top: -40px; width: 560px; height: 560px; opacity: .5; pointer-events: none; z-index: 0; }
   @media (max-width: 760px) { .enso { width: 380px; height: 380px; right: -170px; top: 0; opacity: .35; } }
   .hero-inner { position: relative; z-index: 1; display: grid; grid-template-columns: auto 1fr; gap: 36px; align-items: center; }
   @media (max-width: 760px) { .hero-inner { grid-template-columns: 1fr; gap: 24px; } }
-  .avatar {
-    width: 148px; height: 148px; border-radius: 50%; object-fit: cover;
-    border: 4px solid var(--card); box-shadow: 0 0 0 2px var(--accent), var(--shadow);
-  }
+  .avatar { width: 148px; height: 148px; border-radius: 50%; object-fit: cover; border: 4px solid var(--card); box-shadow: 0 0 0 2px var(--accent), var(--shadow); }
   @media (max-width: 760px) { .avatar { width: 112px; height: 112px; } }
-  .eyebrow {
-    display: inline-flex; align-items: center; gap: 8px; font-size: .8rem; font-weight: 600;
-    letter-spacing: .12em; text-transform: uppercase; color: var(--accent);
-  }
+  .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: .8rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
   .eyebrow::before { content: ""; width: 22px; height: 1px; background: currentColor; }
   h1 { font-size: clamp(2.4rem, 6vw, 4rem); line-height: 1.05; letter-spacing: -.02em; margin: 14px 0 16px; font-weight: 600; }
   .lead { font-size: clamp(1.05rem, 2vw, 1.2rem); color: var(--muted); max-width: 34em; }
@@ -142,9 +120,9 @@
   .btn:hover { transform: translateY(-2px); border-color: var(--accent); }
   .btn.primary { background: var(--text); color: var(--bg); border-color: var(--text); }
   .btn.primary:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
-  .socials { display: flex; gap: 10px; margin-top: 26px; }
+  .socials { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
   .socials a {
-    width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center;
+    width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center;
     border: 1px solid var(--line); color: var(--muted); text-decoration: none; font-size: 1.05rem;
     transition: color .15s, border-color .15s, transform .15s;
   }
@@ -154,6 +132,7 @@
   section { padding: 72px 0; }
   .section-head { margin-bottom: 36px; }
   .section-head h2 { font-size: clamp(1.8rem, 4vw, 2.4rem); line-height: 1.15; letter-spacing: -.015em; margin-top: 10px; font-weight: 600; }
+  .section-head p { color: var(--muted); margin-top: 10px; max-width: 38em; }
   .alt { background: var(--bg-2); }
 
   /* About */
@@ -162,64 +141,82 @@
   .about p { font-size: 1.08rem; color: var(--muted); margin-bottom: 16px; }
   .about p strong { color: var(--text); font-weight: 600; }
   .facts { display: grid; gap: 12px; }
-  .fact {
-    display: flex; gap: 14px; align-items: center; padding: 16px 18px; border-radius: 16px;
-    background: var(--card); border: 1px solid var(--line);
-  }
+  .fact { display: flex; gap: 14px; align-items: center; padding: 16px 18px; border-radius: 16px; background: var(--card); border: 1px solid var(--line); }
   .fact i { width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); flex: none; }
   .fact small { display: block; color: var(--muted); font-size: .78rem; text-transform: uppercase; letter-spacing: .08em; }
   .fact span { font-weight: 500; }
 
-  /* Projects */
-  .project {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
-    padding: 36px; border-radius: 28px; background: var(--card); border: 1px solid var(--line);
-    box-shadow: var(--shadow); margin-bottom: 28px; overflow: hidden;
+  /* Featured: Kinmichi */
+  .feature {
+    display: grid; grid-template-columns: 1.05fr 1fr; gap: 40px; align-items: center;
+    padding: 40px; border-radius: 28px; background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow); overflow: hidden;
   }
-  @media (max-width: 860px) { .project { grid-template-columns: 1fr; padding: 24px; gap: 28px; } }
+  @media (max-width: 860px) { .feature { grid-template-columns: 1fr; padding: 24px; gap: 28px; } }
   .project-title { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
-  .project-title img { width: 52px; height: 52px; border-radius: 14px; }
-  .project-title .badge-icon { width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center; background: #1b2b4a; color: #fff; font-size: 1.3rem; }
-  .project h3 { font-size: 1.7rem; line-height: 1.1; font-weight: 600; }
-  .project .kanji { color: var(--accent); font-size: .95rem; font-weight: 500; }
-  .project p { color: var(--muted); margin: 14px 0 18px; }
+  .project-title img { width: 56px; height: 56px; border-radius: 15px; }
+  .feature h3 { font-size: 2rem; line-height: 1.1; font-weight: 600; }
+  .kanji { color: var(--accent); font-size: .95rem; font-weight: 500; }
+  .feature p.desc { color: var(--muted); margin: 14px 0 18px; font-size: 1.04rem; }
+  .highlights { list-style: none; padding: 0; margin: 0 0 20px; display: grid; gap: 10px; }
+  .highlights li { display: flex; gap: 12px; color: var(--muted); font-size: .96rem; }
+  .highlights i { color: var(--accent); margin-top: 4px; width: 16px; text-align: center; flex: none; }
   .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
   .tags span { font-size: .78rem; padding: 5px 12px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
   .links { display: flex; flex-wrap: wrap; gap: 10px; }
   .links .btn { padding: 10px 16px; font-size: .9rem; }
-  .highlights { list-style: none; padding: 0; margin: 0 0 20px; display: grid; gap: 8px; }
-  .highlights li { display: flex; gap: 10px; color: var(--muted); font-size: .95rem; }
-  .highlights i { color: var(--accent); margin-top: 5px; font-size: .75rem; }
 
-  .phones { position: relative; display: flex; justify-content: center; gap: 0; min-height: 420px; }
-  .phone {
-    width: 200px; border-radius: 30px; padding: 8px; background: #0b0c0f;
-    box-shadow: 0 30px 60px -20px rgba(0,0,0,.45);
+  .phones { position: relative; display: flex; justify-content: center; min-height: 440px; }
+  .phone { width: 210px; aspect-ratio: 9 / 18.5; border-radius: 32px; padding: 8px; background: #0b0c0f; box-shadow: 0 30px 60px -20px rgba(0,0,0,.45); }
+  .phone img { width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 24px; background: #1a1c22; }
+  .phone.back { transform: rotate(-6deg) translate(26px, 20px); z-index: 0; }
+  .phone.front { transform: rotate(4deg) translate(-26px, -6px); z-index: 1; }
+  @media (max-width: 480px) { .phone { width: 160px; } .phones { min-height: 350px; } }
+
+  /* Gallery */
+  .gallery-head { display: flex; align-items: end; justify-content: space-between; gap: 16px; margin: 40px 0 16px; }
+  .gallery-head h4 { font-size: 1.1rem; font-weight: 600; }
+  .gallery-nav { display: flex; gap: 8px; }
+  .gallery-nav button { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); background: var(--card); color: var(--text); cursor: pointer; }
+  .gallery-nav button:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+  .gallery-nav button:disabled { opacity: .35; cursor: default; }
+  .gallery {
+    display: grid; grid-auto-flow: column; grid-auto-columns: minmax(240px, 300px); gap: 16px;
+    overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px 4px 14px; margin: 0 -4px;
+    scrollbar-width: thin; scrollbar-color: var(--line) transparent;
   }
-  .phone img { border-radius: 22px; width: 100%; }
-  .phone.back { transform: rotate(-6deg) translate(24px, 18px); z-index: 0; }
-  .phone.front { transform: rotate(4deg) translate(-24px, -6px); z-index: 1; }
-  @media (max-width: 480px) { .phone { width: 160px; } .phones { min-height: 340px; } }
+  .shot { scroll-snap-align: start; margin: 0; border-radius: 20px; overflow: hidden; background: var(--card); border: 1px solid var(--line); }
+  .shot .frame { aspect-ratio: 620 / 560; overflow: hidden; background: var(--bg-2); }
+  .shot img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+  .shot figcaption { padding: 14px 16px 16px; }
+  .shot b { display: block; font-weight: 600; font-size: .98rem; }
+  .shot span { color: var(--muted); font-size: .88rem; }
+  .more-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; color: var(--accent); font-weight: 600; text-decoration: none; }
+  .more-link:hover { text-decoration: underline; text-underline-offset: 4px; }
 
-  .browser { border-radius: 16px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 30px 60px -24px rgba(0,0,0,.35); background: #fff; }
-  .browser-bar { display: flex; align-items: center; gap: 6px; padding: 10px 12px; background: #e9e6df; }
-  .browser-bar i { width: 10px; height: 10px; border-radius: 50%; background: #d0c9bb; }
-  .browser-bar span { margin-left: 10px; font-size: .75rem; color: #6d6a63; background: #f6f3ec; padding: 3px 10px; border-radius: 6px; }
-  .browser img { width: 100%; aspect-ratio: 16/10; object-fit: cover; object-position: center 40%; }
-
-  .mini-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-  @media (max-width: 640px) { .mini-grid { grid-template-columns: 1fr; } }
-  .mini {
-    display: block; padding: 22px; border-radius: 20px; background: var(--card); border: 1px solid var(--line);
-    text-decoration: none; transition: transform .15s, border-color .15s;
+  /* Side projects */
+  .side-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  @media (max-width: 860px) { .side-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .side-grid { grid-template-columns: 1fr; } }
+  .side {
+    display: flex; flex-direction: column; border-radius: 22px; background: var(--card); border: 1px solid var(--line);
+    overflow: hidden; transition: transform .15s, border-color .15s;
   }
-  .mini:hover { transform: translateY(-3px); border-color: var(--accent); }
-  .mini h4 { display: flex; align-items: center; justify-content: space-between; font-size: 1.05rem; font-weight: 600; }
-  .mini h4 i { color: var(--muted); font-size: .85rem; }
-  .mini p { color: var(--muted); font-size: .93rem; margin: 8px 0 14px; }
-  .mini small { color: var(--muted); font-size: .8rem; }
-  .mini small i { color: var(--accent); margin-right: 6px; }
-  .other-label { font-size: .8rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 44px 0 16px; }
+  .side:hover { transform: translateY(-3px); border-color: var(--accent); }
+  .side .thumb { aspect-ratio: 16 / 9; background: #eef0f3; overflow: hidden; border-bottom: 1px solid var(--line); }
+  .side .thumb img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }
+  .side .thumb.icon { display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); font-size: 2.2rem; }
+  .side .body { padding: 20px; display: flex; flex-direction: column; flex: 1; }
+  .side h4 { font-size: 1.1rem; font-weight: 600; }
+  .side p { color: var(--muted); font-size: .93rem; margin: 8px 0 16px; flex: 1; }
+  .side .row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
+  .side small { color: var(--muted); font-size: .8rem; }
+  .side small i { color: var(--accent); margin-right: 6px; }
+  .side .side-links { display: flex; gap: 6px; }
+  .side .side-links a {
+    width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; text-decoration: none;
+    border: 1px solid var(--line); color: var(--muted);
+  }
+  .side .side-links a:hover { color: var(--accent); border-color: var(--accent); }
 
   /* Toolkit */
   .toolkit { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
@@ -231,13 +228,13 @@
   .chips span { font-size: .85rem; padding: 6px 12px; border-radius: 10px; background: var(--accent-soft); color: var(--text); }
 
   /* Contact */
-  .contact {
-    text-align: center; padding: 56px 28px; border-radius: 32px;
-    background: linear-gradient(160deg, var(--card), var(--bg-2)); border: 1px solid var(--line); position: relative; overflow: hidden;
-  }
+  .contact { text-align: center; padding: 56px 28px; border-radius: 32px; background: linear-gradient(160deg, var(--card), var(--bg-2)); border: 1px solid var(--line); }
   .contact h2 { font-size: clamp(1.9rem, 4.5vw, 2.8rem); line-height: 1.1; letter-spacing: -.015em; font-weight: 600; margin: 12px 0 14px; }
   .contact p { color: var(--muted); max-width: 30em; margin: 0 auto 28px; }
   .contact .cta { justify-content: center; margin-top: 0; }
+  .copy-line { margin-top: 18px; font-size: .88rem; color: var(--muted); }
+  .copy-btn { background: none; border: 0; padding: 4px 6px; font: inherit; color: var(--text); cursor: pointer; text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 3px; border-radius: 6px; }
+  .copy-btn:hover { color: var(--accent); }
 
   footer { padding: 36px 0 48px; color: var(--muted); font-size: .85rem; }
   footer .wrap { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: center; }
@@ -247,16 +244,10 @@
   /* Reveal */
   .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
   .js .reveal.in { opacity: 1; transform: none; }
-  .copy-line { margin-top: 18px; font-size: .88rem; color: var(--muted); }
-  .copy-btn {
-    background: none; border: 0; padding: 4px 6px; font: inherit; color: var(--text); cursor: pointer;
-    text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 3px; border-radius: 6px;
-  }
-  .copy-btn:hover { color: var(--accent); }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .js .reveal { opacity: 1; transform: none; transition: none; }
-    .btn, .socials a, .mini { transition: none; }
+    .btn, .socials a, .side { transition: none; }
   }
 </style>
 </head>
@@ -269,10 +260,12 @@
       <span>Abdulsamet</span>
     </a>
     <div class="nav-links">
-      <a href="#about" class="hide-sm">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact" class="hide-sm">Contact</a>
-      <button class="theme-btn" id="themeBtn" aria-label="Toggle theme"><i class="fa-solid fa-circle-half-stroke"></i></button>
+      <a href="#about" class="hide-md" data-i18n="nav_about">About</a>
+      <a href="#kinmichi">Kinmichi</a>
+      <a href="#side" class="hide-sm" data-i18n="nav_side">Side projects</a>
+      <a href="#contact" class="hide-md" data-i18n="nav_contact">Contact</a>
+      <button class="icon-btn" id="langBtn" type="button" aria-label="Türkçe'ye geç">TR</button>
+      <button class="icon-btn" id="themeBtn" type="button" aria-label="Toggle theme"><i class="fa-solid fa-circle-half-stroke"></i></button>
     </div>
   </div>
 </nav>
@@ -286,16 +279,16 @@
     <div class="hero-inner">
       <img class="avatar reveal" src="assets/avatar.jpg" alt="Abdulsamet Açıkgöz" width="148" height="148">
       <div class="reveal">
-        <span class="eyebrow">Hello, I'm</span>
+        <span class="eyebrow" data-i18n="hero_hello">Hello, I'm</span>
         <h1 class="serif">Abdulsamet Açıkgöz</h1>
-        <p class="lead">Management Information Systems student at <strong>Bursa Uludağ University</strong>, interested in artificial intelligence and building small, thoughtful software along the way.</p>
+        <p class="lead" data-i18n-html="hero_lead">Management Information Systems student at <strong>Bursa Uludağ University</strong>, interested in artificial intelligence and building small, thoughtful software along the way.</p>
         <div class="meta">
           <span><i class="fa-solid fa-location-dot"></i>Kocaeli, Türkiye</span>
-          <span><i class="fa-solid fa-graduation-cap"></i>MIS · Bursa Uludağ University</span>
+          <span><i class="fa-solid fa-graduation-cap"></i><span data-i18n="hero_meta_uni">MIS · Bursa Uludağ University</span></span>
         </div>
         <div class="cta">
-          <a class="btn primary" href="#projects"><i class="fa-solid fa-arrow-down"></i>See my work</a>
-          <a class="btn" href="#contact"><i class="fa-regular fa-paper-plane"></i>Get in touch</a>
+          <a class="btn primary" href="#kinmichi"><i class="fa-solid fa-arrow-down"></i><span data-i18n="hero_cta_work">See my work</span></a>
+          <a class="btn" href="#contact"><i class="fa-regular fa-paper-plane"></i><span data-i18n="hero_cta_contact">Get in touch</span></a>
         </div>
         <div class="socials" aria-label="Social profiles">
           <a href="https://www.linkedin.com/in/abdulsametacikgoz/" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
@@ -313,106 +306,145 @@
 <section id="about" class="alt">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">About</span>
-      <h2 class="serif">Where business meets technology</h2>
+      <span class="eyebrow" data-i18n="about_tag">About</span>
+      <h2 class="serif" data-i18n="about_title">Where business meets technology</h2>
     </div>
     <div class="about">
       <div class="reveal">
-        <p>I study <strong>Management Information Systems</strong>, the field that sits between how organizations work and the technology that runs them. I'm especially drawn to <strong>artificial intelligence</strong>: how AI can make information systems smarter, and how people can put it to work in everyday tools.</p>
-        <p>Outside of class I like turning ideas into working products. My biggest one so far is <strong>Kinmichi</strong>, an open-source habit tracker for Android that I design, build and ship myself.</p>
+        <p data-i18n-html="about_p1">I study <strong>Management Information Systems</strong>, the field that sits between how organizations work and the technology that runs them. I'm especially drawn to <strong>artificial intelligence</strong>: how AI can make information systems smarter, and how people can put it to work in everyday tools.</p>
+        <p data-i18n-html="about_p2">Outside of class I like turning ideas into working products. My biggest one so far is <strong>Kinmichi</strong>, an open-source habit tracker for Android that I design, build and ship myself.</p>
       </div>
       <div class="facts reveal">
-        <div class="fact"><i class="fa-solid fa-graduation-cap"></i><div><small>Studying</small><span>Management Information Systems</span></div></div>
-        <div class="fact"><i class="fa-solid fa-building-columns"></i><div><small>University</small><span>Bursa Uludağ University</span></div></div>
-        <div class="fact"><i class="fa-solid fa-brain"></i><div><small>Interested in</small><span>Artificial intelligence · Data · Information systems</span></div></div>
-        <div class="fact"><i class="fa-solid fa-location-dot"></i><div><small>Based in</small><span>Kocaeli, Türkiye</span></div></div>
+        <div class="fact"><i class="fa-solid fa-graduation-cap"></i><div><small data-i18n="fact_study_l">Studying</small><span data-i18n="fact_study">Management Information Systems</span></div></div>
+        <div class="fact"><i class="fa-solid fa-building-columns"></i><div><small data-i18n="fact_uni_l">University</small><span data-i18n="fact_uni">Bursa Uludağ University</span></div></div>
+        <div class="fact"><i class="fa-solid fa-brain"></i><div><small data-i18n="fact_int_l">Interested in</small><span data-i18n="fact_int">Artificial intelligence · Data · Information systems</span></div></div>
+        <div class="fact"><i class="fa-solid fa-location-dot"></i><div><small data-i18n="fact_loc_l">Based in</small><span>Kocaeli, Türkiye</span></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="projects">
+<section id="kinmichi">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">Projects</span>
-      <h2 class="serif">Things I've built</h2>
+      <span class="eyebrow" data-i18n="feat_tag">Featured project</span>
+      <h2 class="serif" data-i18n="feat_title">My main project</h2>
     </div>
 
-    <article class="project reveal">
+    <article class="feature reveal">
       <div>
         <div class="project-title">
-          <img src="assets/kinmichi-icon.png" alt="" width="52" height="52">
+          <img src="assets/kinmichi-icon.png" alt="" width="56" height="56">
           <div>
             <h3 class="serif">Kinmichi</h3>
-            <span class="kanji">金道 · the golden path</span>
+            <span class="kanji" data-i18n="k_kanji">金道 · the golden path</span>
           </div>
         </div>
-        <p>A calm, open-source habit tracker for Android. Instead of punishing missed days, it plans for them: bad-day versions of habits, a "never miss twice" rule, and comebacks mended in gold.</p>
+        <p class="desc" data-i18n="k_desc">A calm, open-source habit tracker for Android, built around the day after you slip, not the perfect streak. Every habit gets a bad-day version, a missed day is followed by a "never miss twice" nudge, and comebacks are drawn in gold.</p>
         <ul class="highlights">
-          <li><i class="fa-solid fa-circle"></i>Material You design, home-screen widgets and a Wear OS companion</li>
-          <li><i class="fa-solid fa-circle"></i>Available in 10 languages, with Google, GitHub and guest sign-in</li>
-          <li><i class="fa-solid fa-circle"></i>Released openly on GitHub under the MIT license</li>
+          <li><i class="fa-solid fa-feather-pointed"></i><span data-i18n="k_h1">Material You design with seven palettes, light and dark</span></li>
+          <li><i class="fa-solid fa-mobile-screen-button"></i><span data-i18n="k_h2">Home-screen widgets and a Wear OS tile and watch app</span></li>
+          <li><i class="fa-solid fa-language"></i><span data-i18n="k_h3">10 languages, with Google, GitHub and guest sign-in</span></li>
+          <li><i class="fa-solid fa-lock-open"></i><span data-i18n="k_h4">Free and open source under the MIT license, no ads</span></li>
         </ul>
-        <div class="tags"><span>Kotlin</span><span>Jetpack Compose</span><span>Wear OS</span><span>Firebase</span><span>Open source</span></div>
+        <div class="tags"><span>Kotlin</span><span>Jetpack Compose</span><span>Wear OS</span><span>Firebase</span><span data-i18n="tag_os">Open source</span></div>
         <div class="links">
-          <a class="btn primary" href="https://sametackgz41.github.io/kinmichi/"><i class="fa-solid fa-arrow-up-right-from-square"></i>Website</a>
-          <a class="btn" href="https://github.com/sametackgz41/kinmichi"><i class="fa-brands fa-github"></i>Source</a>
-          <a class="btn" href="https://github.com/sametackgz41/kinmichi/releases/latest"><i class="fa-solid fa-download"></i>Download</a>
+          <a class="btn primary" href="https://sametackgz41.github.io/kinmichi/"><i class="fa-solid fa-arrow-up-right-from-square"></i><span data-i18n="btn_site">Website</span></a>
+          <a class="btn" href="https://github.com/sametackgz41/kinmichi/releases/latest"><i class="fa-solid fa-download"></i><span data-i18n="btn_download">Download</span></a>
+          <a class="btn" href="https://github.com/sametackgz41/kinmichi"><i class="fa-brands fa-github"></i><span data-i18n="btn_source">Source</span></a>
         </div>
       </div>
       <div class="phones">
-        <div class="phone back"><img src="assets/today_en_light.webp" alt="Kinmichi Today screen in light mode" loading="lazy" width="540" height="1170"></div>
-        <div class="phone front"><img src="assets/today_en_dark.webp" alt="Kinmichi Today screen in dark mode" loading="lazy" width="540" height="1170"></div>
+        <div class="phone back"><img class="k-img" data-light="hero_light" data-dark="hero_light" alt="Kinmichi Today screen, light theme" width="900" height="1336" loading="lazy"></div>
+        <div class="phone front"><img class="k-img" data-light="hero_dark" data-dark="hero_dark" alt="Kinmichi Today screen, dark theme" width="900" height="1336" loading="lazy"></div>
       </div>
     </article>
 
-    <article class="project reveal">
-      <div>
-        <div class="project-title">
-          <div class="badge-icon"><i class="fa-solid fa-school"></i></div>
-          <div>
-            <h3 class="serif">KampüsAğ</h3>
-            <span class="kanji">University community platform</span>
+    <div class="gallery-head reveal">
+      <h4 data-i18n="gal_title">A look inside</h4>
+      <div class="gallery-nav">
+        <button type="button" id="galPrev" aria-label="Previous screenshots"><i class="fa-solid fa-arrow-left"></i></button>
+        <button type="button" id="galNext" aria-label="Next screenshots"><i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+    </div>
+    <div class="gallery reveal" id="gallery" tabindex="0" aria-label="Kinmichi screenshots">
+      <figure class="shot"><div class="frame"><img class="k-img" data-light="gal_today_light" data-dark="gal_today_dark" alt="" width="620" height="543" loading="lazy"></div>
+        <figcaption><b data-i18n="g1_t">Today</b><span data-i18n="g1_d">Daily progress, streaks and one-tap check-ins</span></figcaption></figure>
+      <figure class="shot"><div class="frame"><img class="k-img" data-light="gal_progress_light" data-dark="gal_progress_dark" alt="" width="620" height="543" loading="lazy"></div>
+        <figcaption><b data-i18n="g2_t">Progress</b><span data-i18n="g2_d">Weekly score, completion rate and trends</span></figcaption></figure>
+      <figure class="shot"><div class="frame"><img class="k-img" data-light="gal_detail_light" data-dark="gal_detail_dark" alt="" width="620" height="543" loading="lazy"></div>
+        <figcaption><b data-i18n="g3_t">Habit detail</b><span data-i18n="g3_d">A full year of a habit at a glance</span></figcaption></figure>
+      <figure class="shot"><div class="frame"><img class="k-img" data-light="gal_editor_light" data-dark="gal_editor_dark" alt="" width="620" height="543" loading="lazy"></div>
+        <figcaption><b data-i18n="g4_t">Habit editor</b><span data-i18n="g4_d">Adding a habit step by step, with a bad-day version</span></figcaption></figure>
+      <figure class="shot"><div class="frame"><img class="k-img" data-light="widgets" data-dark="widgets_dark" alt="" width="760" height="942" loading="lazy"></div>
+        <figcaption><b data-i18n="g5_t">Widgets</b><span data-i18n="g5_d">Eight home-screen widgets, from Today to a mini heatmap</span></figcaption></figure>
+      <figure class="shot"><div class="frame"><img class="k-img" data-light="feat_alarm" data-dark="feat_alarm_dark" alt="" width="720" height="871" loading="lazy"></div>
+        <figcaption><b data-i18n="g6_t">Wake-up alarm</b><span data-i18n="g6_d">A real alarm you turn off by solving small tasks</span></figcaption></figure>
+    </div>
+    <a class="more-link reveal" href="https://sametackgz41.github.io/kinmichi/"><span data-i18n="more_k">Everything about Kinmichi on its own site</span> <i class="fa-solid fa-arrow-right"></i></a>
+  </div>
+</section>
+
+<section id="side" class="alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow" data-i18n="side_tag">Side projects</span>
+      <h2 class="serif" data-i18n="side_title">Smaller things I've built</h2>
+    </div>
+    <div class="side-grid">
+      <article class="side reveal">
+        <div class="thumb"><img src="assets/kampusag.png" alt="KampüsAğ sign-in page" width="800" height="720" loading="lazy"></div>
+        <div class="body">
+          <h4>KampüsAğ</h4>
+          <p data-i18n="s1_d">A university community platform for students, alumni and administrators, built during an R&amp;D camp: events, career guidance and note sharing.</p>
+          <div class="row">
+            <small><i class="fa-brands fa-react"></i>React · Vite</small>
+            <div class="side-links">
+              <a href="https://kampusag.vercel.app" aria-label="KampüsAğ live demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+              <a href="https://github.com/sametackgz41/KampusAg" aria-label="KampüsAğ source on GitHub"><i class="fa-brands fa-github"></i></a>
+            </div>
           </div>
         </div>
-        <p>A web platform that brings students, alumni and administrators together in one place, built during an R&amp;D camp. It covers event tracking, career guidance, course-note sharing and alumni networking, with role-based accounts.</p>
-        <div class="tags"><span>React</span><span>Vite</span><span>JavaScript</span><span>Vercel</span></div>
-        <div class="links">
-          <a class="btn primary" href="https://kampusag.vercel.app"><i class="fa-solid fa-arrow-up-right-from-square"></i>Live demo</a>
-          <a class="btn" href="https://github.com/sametackgz41/KampusAg"><i class="fa-brands fa-github"></i>Source</a>
+      </article>
+      <article class="side reveal">
+        <div class="thumb icon"><i class="fa-solid fa-book-open"></i></div>
+        <div class="body">
+          <h4>lnreader-plugins-tr</h4>
+          <p data-i18n="s2_d">Turkish source plugins for LNReader, an open-source light novel reader app.</p>
+          <div class="row">
+            <small><i class="fa-brands fa-js"></i>JavaScript</small>
+            <div class="side-links">
+              <a href="https://github.com/sametackgz41/lnreader-plugins-tr" aria-label="lnreader-plugins-tr source on GitHub"><i class="fa-brands fa-github"></i></a>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="browser">
-        <div class="browser-bar"><i></i><i></i><i></i><span>kampusag.vercel.app</span></div>
-        <img src="assets/kampusag.png" alt="KampüsAğ sign-in page" loading="lazy" width="800" height="720">
-      </div>
-    </article>
-
-    <div class="other-label reveal">Other projects</div>
-    <div class="mini-grid">
-      <a class="mini reveal" href="https://github.com/sametackgz41/lnreader-plugins-tr">
-        <h4>lnreader-plugins-tr <i class="fa-solid fa-arrow-up-right-from-square"></i></h4>
-        <p>Turkish source plugins for the LNReader app.</p>
-        <small><i class="fa-brands fa-js"></i>JavaScript</small>
-      </a>
-      <a class="mini reveal" href="https://github.com/sametackgz41/novel-compiler">
-        <h4>novel-compiler <i class="fa-solid fa-arrow-up-right-from-square"></i></h4>
-        <p>Web novel reader that compiles chapters into EPUB files.</p>
-        <small><i class="fa-brands fa-node-js"></i>Node.js · Express</small>
-      </a>
+      </article>
+      <article class="side reveal">
+        <div class="thumb icon"><i class="fa-solid fa-file-zipper"></i></div>
+        <div class="body">
+          <h4>novel-compiler</h4>
+          <p data-i18n="s3_d">A web novel reader that compiles chapters into EPUB files for offline reading.</p>
+          <div class="row">
+            <small><i class="fa-brands fa-node-js"></i>Node.js · Express</small>
+            <div class="side-links">
+              <a href="https://github.com/sametackgz41/novel-compiler" aria-label="novel-compiler source on GitHub"><i class="fa-brands fa-github"></i></a>
+            </div>
+          </div>
+        </div>
+      </article>
     </div>
   </div>
 </section>
 
-<section class="alt">
+<section>
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">Toolkit</span>
-      <h2 class="serif">What I work with</h2>
+      <span class="eyebrow" data-i18n="tool_tag">Toolkit</span>
+      <h2 class="serif" data-i18n="tool_title">What I work with</h2>
     </div>
     <div class="toolkit">
       <div class="tool-group reveal">
-        <h4><i class="fa-solid fa-mobile-screen"></i>Mobile</h4>
+        <h4><i class="fa-solid fa-mobile-screen"></i><span data-i18n="tool_mobile">Mobile</span></h4>
         <div class="chips"><span>Kotlin</span><span>Jetpack Compose</span><span>Wear OS</span><span>Firebase</span></div>
       </div>
       <div class="tool-group reveal">
@@ -420,25 +452,25 @@
         <div class="chips"><span>JavaScript</span><span>React</span><span>Vite</span><span>Node.js</span><span>Express</span><span>HTML &amp; CSS</span></div>
       </div>
       <div class="tool-group reveal">
-        <h4><i class="fa-solid fa-screwdriver-wrench"></i>Other</h4>
+        <h4><i class="fa-solid fa-screwdriver-wrench"></i><span data-i18n="tool_other">Other</span></h4>
         <div class="chips"><span>C#</span><span>Git &amp; GitHub</span><span>GitHub Actions</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="contact">
+<section id="contact" class="alt">
   <div class="wrap">
     <div class="contact reveal">
-      <span class="eyebrow">Contact</span>
-      <h2 class="serif">Let's connect</h2>
-      <p>Open to internships, collaborations and good conversations about technology. The fastest way to reach me is email or LinkedIn.</p>
+      <span class="eyebrow" data-i18n="c_tag">Contact</span>
+      <h2 class="serif" data-i18n="c_title">Let's connect</h2>
+      <p data-i18n="c_lead">Open to internships, collaborations and good conversations about technology. The fastest way to reach me is email or LinkedIn.</p>
       <div class="cta">
-        <a class="btn primary" id="mailBtn" href="#contact"><i class="fa-regular fa-envelope"></i>Email me</a>
+        <a class="btn primary" id="mailBtn" href="#contact"><i class="fa-regular fa-envelope"></i><span data-i18n="c_email">Email me</span></a>
         <a class="btn" href="https://www.linkedin.com/in/abdulsametacikgoz/"><i class="fa-brands fa-linkedin-in"></i>LinkedIn</a>
-        <a class="btn" href="https://linktr.ee/41samet49"><i class="fa-solid fa-link"></i>All links</a>
+        <a class="btn" href="https://linktr.ee/41samet49"><i class="fa-solid fa-link"></i><span data-i18n="c_links">All links</span></a>
       </div>
-      <p class="copy-line">No mail app? <button class="copy-btn" id="copyBtn" type="button">Copy my email address</button><span class="sr-only" id="copyStatus" aria-live="polite"></span></p>
+      <p class="copy-line"><span data-i18n="c_nomail">No mail app?</span> <button class="copy-btn" id="copyBtn" type="button" data-i18n="c_copy">Copy my email address</button><span class="sr-only" id="copyStatus" aria-live="polite"></span></p>
     </div>
   </div>
 </section>
@@ -446,24 +478,120 @@
 <footer>
   <div class="wrap">
     <span>© 2026 Abdulsamet Açıkgöz</span>
-    <a href="#top">Back to top <i class="fa-solid fa-arrow-up"></i></a>
+    <a href="#top"><span data-i18n="back_top">Back to top</span> <i class="fa-solid fa-arrow-up"></i></a>
   </div>
 </footer>
 
 <script>
+  var I18N_TR = {
+    nav_about: 'Hakkımda', nav_side: 'Yan projeler', nav_contact: 'İletişim',
+    hero_hello: 'Merhaba, ben',
+    hero_lead: '<strong>Bursa Uludağ Üniversitesi</strong>\'nde Yönetim Bilişim Sistemleri öğrencisiyim. Yapay zekaya ilgi duyuyor, bu yolda küçük ve özenli yazılımlar geliştiriyorum.',
+    hero_meta_uni: 'YBS · Bursa Uludağ Üniversitesi',
+    hero_cta_work: 'Çalışmalarım', hero_cta_contact: 'İletişime geç',
+    about_tag: 'Hakkımda', about_title: 'İş dünyası ile teknolojinin buluştuğu yer',
+    about_p1: '<strong>Yönetim Bilişim Sistemleri</strong> okuyorum: kurumların işleyişi ile onları ayakta tutan teknolojinin kesiştiği bir alan. En çok <strong>yapay zekaya</strong> ilgi duyuyorum: bilgi sistemlerini nasıl daha akıllı hâle getirebileceğine ve insanların onu günlük araçlarda nasıl kullanabileceğine.',
+    about_p2: 'Derslerin dışında fikirleri çalışan ürünlere dönüştürmeyi seviyorum. Şimdiye kadarki en büyük projem, kendim tasarlayıp geliştirdiğim ve yayınladığım açık kaynak Android alışkanlık uygulaması <strong>Kinmichi</strong>.',
+    fact_study_l: 'Bölüm', fact_study: 'Yönetim Bilişim Sistemleri',
+    fact_uni_l: 'Üniversite', fact_uni: 'Bursa Uludağ Üniversitesi',
+    fact_int_l: 'İlgi alanları', fact_int: 'Yapay zeka · Veri · Bilgi sistemleri',
+    fact_loc_l: 'Konum',
+    feat_tag: 'Öne çıkan proje', feat_title: 'Ana projem',
+    k_kanji: '金道 · altın yol',
+    k_desc: 'Kusursuz seriye değil, kaçırdığın günün ertesine odaklanan sakin, açık kaynak bir Android alışkanlık uygulaması. Her alışkanlığın bir kötü gün versiyonu var, kaçırılan günün ardından "asla iki kez kaçırma" hatırlatması geliyor ve geri dönüşler altınla çiziliyor.',
+    k_h1: 'Yedi renk paleti, açık ve koyu temayla Material You tasarımı',
+    k_h2: 'Ana ekran widget\'ları, Wear OS kutucuğu ve saat uygulaması',
+    k_h3: '10 dil; Google, GitHub ve misafir girişi',
+    k_h4: 'MIT lisanslı, ücretsiz ve açık kaynak; reklam yok',
+    tag_os: 'Açık kaynak',
+    btn_site: 'Web sitesi', btn_download: 'İndir', btn_source: 'Kaynak kod',
+    gal_title: 'Uygulamanın içinden',
+    g1_t: 'Bugün', g1_d: 'Günlük ilerleme, seriler ve tek dokunuşla işaretleme',
+    g2_t: 'İlerleme', g2_d: 'Haftalık skor, tamamlama oranı ve eğilimler',
+    g3_t: 'Alışkanlık detayı', g3_d: 'Bir alışkanlığın bütün yılı tek bakışta',
+    g4_t: 'Alışkanlık ekleme', g4_d: 'Kötü gün versiyonuyla adım adım alışkanlık ekleme',
+    g5_t: 'Widget\'lar', g5_d: 'Bugün\'den mini ısı haritasına sekiz ana ekran widget\'ı',
+    g6_t: 'Uyandıran alarm', g6_d: 'Küçük görevleri çözerek kapattığın gerçek bir alarm',
+    more_k: 'Kinmichi hakkında her şey kendi sitesinde',
+    side_tag: 'Yan projeler', side_title: 'Geliştirdiğim küçük projeler',
+    s1_d: 'Bir Ar-Ge kampında geliştirdiğim; öğrencileri, mezunları ve yöneticileri buluşturan üniversite topluluk platformu: etkinlikler, kariyer rehberliği ve not paylaşımı.',
+    s2_d: 'Açık kaynak hafif roman okuma uygulaması LNReader için Türkçe kaynak eklentileri.',
+    s3_d: 'Bölümleri çevrimdışı okumak için EPUB dosyasına derleyen bir web roman okuyucusu.',
+    tool_tag: 'Araçlar', tool_title: 'Neyle çalışıyorum', tool_mobile: 'Mobil', tool_other: 'Diğer',
+    c_tag: 'İletişim', c_title: 'Tanışalım',
+    c_lead: 'Staj, iş birliği ve teknoloji üzerine güzel sohbetlere açığım. Bana en hızlı e-posta veya LinkedIn üzerinden ulaşabilirsin.',
+    c_email: 'E-posta gönder', c_links: 'Tüm linkler', c_nomail: 'Mail uygulaman yok mu?', c_copy: 'E-posta adresimi kopyala',
+    back_top: 'Başa dön'
+  };
+  var UI = {
+    en: { toTr: 'Türkçe\'ye geç', toLight: 'Switch to light theme', toDark: 'Switch to dark theme', copied: 'Copied: ', copiedSr: 'Email address copied', copy: 'Copy my email address' },
+    tr: { toEn: 'Switch to English', toLight: 'Açık temaya geç', toDark: 'Koyu temaya geç', copied: 'Kopyalandı: ', copiedSr: 'E-posta adresi kopyalandı', copy: 'E-posta adresimi kopyala' }
+  };
+  var root = document.documentElement;
+  var lang = function () { return root.lang === 'tr' ? 'tr' : 'en'; };
+  var theme = function () { return root.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); };
+
+  // Remember the English text that ships in the HTML so switching back needs no second dictionary.
+  document.querySelectorAll('[data-i18n]').forEach(function (el) { el.dataset.en = el.textContent; });
+  document.querySelectorAll('[data-i18n-html]').forEach(function (el) { el.dataset.enHtml = el.innerHTML; });
+
+  // Kinmichi screenshots come from the Kinmichi site itself, in the current language and theme.
+  function paintShots() {
+    var base = '/kinmichi/img/' + lang() + '/', dark = theme() === 'dark';
+    document.querySelectorAll('.k-img').forEach(function (img) {
+      var src = base + (dark ? img.dataset.dark : img.dataset.light) + '.webp';
+      if (img.getAttribute('src') !== src) img.setAttribute('src', src);
+    });
+  }
+
+  function applyLang() {
+    var tr = lang() === 'tr';
+    document.querySelectorAll('[data-i18n]').forEach(function (el) {
+      el.textContent = tr && I18N_TR[el.dataset.i18n] ? I18N_TR[el.dataset.i18n] : el.dataset.en;
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
+      el.innerHTML = tr && I18N_TR[el.dataset.i18nHtml] ? I18N_TR[el.dataset.i18nHtml] : el.dataset.enHtml;
+    });
+    var lb = document.getElementById('langBtn');
+    lb.textContent = tr ? 'EN' : 'TR';
+    lb.setAttribute('aria-label', tr ? UI.tr.toEn : UI.en.toTr);
+    paintTheme(); paintShots();
+  }
+
+  function paintTheme() {
+    var dark = theme() === 'dark', t = UI[lang()], btn = document.getElementById('themeBtn');
+    btn.innerHTML = dark ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
+    btn.setAttribute('aria-label', dark ? t.toLight : t.toDark);
+  }
+
+  document.getElementById('langBtn').addEventListener('click', function () {
+    root.lang = lang() === 'tr' ? 'en' : 'tr';
+    // Same origin as the Kinmichi site, so its language follows this choice too.
+    try { localStorage.setItem('lang', root.lang); localStorage.setItem('kinmichi-lang', root.lang); } catch (e) {}
+    applyLang();
+  });
+
+  document.getElementById('themeBtn').addEventListener('click', function () {
+    var next = theme() === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('theme', next); } catch (e) {}
+    paintTheme(); paintShots();
+  });
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () { paintTheme(); paintShots(); });
+
   // Email assembled at runtime so the address isn't in the page source for scrapers.
   (function () {
     var addr = '41samet49' + '@' + 'gmail.com';
     document.getElementById('mailBtn').href = 'mailto:' + addr;
     var btn = document.getElementById('copyBtn'), status = document.getElementById('copyStatus');
     btn.addEventListener('click', function () {
+      var t = UI[lang()];
       var done = function () {
-        btn.textContent = 'Copied: ' + addr; status.textContent = 'Email address copied';
-        setTimeout(function () { btn.textContent = 'Copy my email address'; status.textContent = ''; }, 2500);
+        btn.textContent = t.copied + addr; status.textContent = t.copiedSr;
+        setTimeout(function () { btn.textContent = UI[lang()].copy; status.textContent = ''; }, 2500);
       };
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(addr).then(done, function () { btn.textContent = addr; });
-      } else { btn.textContent = addr; }
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(addr).then(done, function () { btn.textContent = addr; });
+      else btn.textContent = addr;
     });
   })();
 
@@ -472,25 +600,17 @@
     if (a.hostname !== location.hostname) { a.target = '_blank'; a.rel = 'noopener'; }
   });
 
-  // Theme toggle (remembered per browser); icon and label follow the current theme.
+  // Gallery arrows.
   (function () {
-    var root = document.documentElement, key = 'theme', btn = document.getElementById('themeBtn');
-    var current = function () {
-      return root.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    var g = document.getElementById('gallery'), prev = document.getElementById('galPrev'), next = document.getElementById('galNext');
+    var step = function () { var s = g.querySelector('.shot'); return s ? s.getBoundingClientRect().width + 16 : 300; };
+    var update = function () {
+      prev.disabled = g.scrollLeft <= 4;
+      next.disabled = g.scrollLeft + g.clientWidth >= g.scrollWidth - 4;
     };
-    var paint = function () {
-      var dark = current() === 'dark';
-      btn.innerHTML = dark ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
-      btn.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
-    };
-    btn.addEventListener('click', function () {
-      var next = current() === 'dark' ? 'light' : 'dark';
-      root.setAttribute('data-theme', next);
-      try { localStorage.setItem(key, next); } catch (e) {}
-      paint();
-    });
-    matchMedia('(prefers-color-scheme: dark)').addEventListener('change', paint);
-    paint();
+    prev.addEventListener('click', function () { g.scrollBy({ left: -step(), behavior: 'smooth' }); });
+    next.addEventListener('click', function () { g.scrollBy({ left: step(), behavior: 'smooth' }); });
+    g.addEventListener('scroll', update, { passive: true }); addEventListener('resize', update); update();
   })();
 
   // Nav border on scroll.
@@ -509,6 +629,8 @@
     }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
     els.forEach(function (e) { io.observe(e); });
   })();
+
+  applyLang();
 </script>
 </body>
 </html>
