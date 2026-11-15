@@ -1,0 +1,250 @@
+{
+  "nav": {
+    "nav_about": {
+      "en": "About",
+      "tr": "Hakkımda"
+    },
+    "nav_side": {
+      "en": "Side projects",
+      "tr": "Yan projeler"
+    },
+    "nav_contact": {
+      "en": "Contact",
+      "tr": "İletişim"
+    }
+  },
+  "hero": {
+    "hero_hello": {
+      "en": "Hi, I'm",
+      "tr": "Merhaba, ben"
+    },
+    "hero_lead": {
+      "en": "I study Management Information Systems at **Bursa Uludağ University**. I'm into AI, and in my free time I build apps I actually want to use myself.",
+      "tr": "**Bursa Uludağ Üniversitesi**'nde Yönetim Bilişim Sistemleri okuyorum. Yapay zekayla ilgileniyorum, boş zamanlarımda da kendi kullanmak isteyeceğim uygulamalar yapıyorum."
+    },
+    "hero_meta_uni": {
+      "en": "MIS · Bursa Uludağ University",
+      "tr": "YBS · Bursa Uludağ Üniversitesi"
+    },
+    "location": {
+      "en": "Kocaeli, Türkiye",
+      "tr": "Kocaeli, Türkiye"
+    },
+    "hero_cta_work": {
+      "en": "My projects",
+      "tr": "Projelerim"
+    },
+    "hero_cta_contact": {
+      "en": "Get in touch",
+      "tr": "Bana yaz"
+    }
+  },
+  "about": {
+    "about_tag": {
+      "en": "About",
+      "tr": "Hakkımda"
+    },
+    "about_title": {
+      "en": "A bit about me",
+      "tr": "Kısaca ben"
+    },
+    "about_p1": {
+      "en": "My department sits between business and software: how companies run, and the systems behind them. What pulls me in most is **artificial intelligence**, especially the everyday side of it, like tools that save people time.",
+      "tr": "Bölümüm işletme ile yazılımın arasında bir yerde duruyor: şirketlerin nasıl işlediği ve bunun arkasındaki sistemler. Beni en çok çeken konu **yapay zeka**, özellikle de gündelik hayattaki tarafı; insanlara zaman kazandıran araçlar gibi."
+    },
+    "about_p2": {
+      "en": "I like learning by building things. My biggest project so far is **Kinmichi**, a habit tracker for Android that I design and code on my own. It's free and open source.",
+      "tr": "Bir şeyler yaparak öğrenmeyi seviyorum. Şimdiye kadarki en büyük projem **Kinmichi**: tasarımından koduna kadar tek başıma geliştirdiğim bir Android alışkanlık uygulaması. Ücretsiz ve açık kaynak."
+    },
+    "fact_study_l": {
+      "en": "Studying",
+      "tr": "Bölüm"
+    },
+    "fact_study": {
+      "en": "Management Information Systems",
+      "tr": "Yönetim Bilişim Sistemleri"
+    },
+    "fact_uni_l": {
+      "en": "University",
+      "tr": "Üniversite"
+    },
+    "fact_uni": {
+      "en": "Bursa Uludağ University",
+      "tr": "Bursa Uludağ Üniversitesi"
+    },
+    "fact_int_l": {
+      "en": "Interested in",
+      "tr": "İlgi alanları"
+    },
+    "fact_int": {
+      "en": "Artificial intelligence · Data · Information systems",
+      "tr": "Yapay zeka · Veri · Bilgi sistemleri"
+    },
+    "fact_loc_l": {
+      "en": "Based in",
+      "tr": "Konum"
+    }
+  },
+  "kinmichi": {
+    "feat_tag": {
+      "en": "Featured project",
+      "tr": "Öne çıkan proje"
+    },
+    "feat_title": {
+      "en": "What I'm working on",
+      "tr": "Üzerinde çalıştığım proje"
+    },
+    "k_kanji": {
+      "en": "金道 · the golden path",
+      "tr": "金道 · altın yol"
+    },
+    "k_desc": {
+      "en": "A habit tracker that doesn't punish you for missing a day. Every habit has an easier \"bad day\" version, and if you skip one, the app reminds you not to skip twice. When you get back on track, the comeback shows up in gold.",
+      "tr": "Bir günü kaçırdın diye seni cezalandırmayan bir alışkanlık uygulaması. Her alışkanlığın daha kolay bir \"kötü gün\" versiyonu var; bir gün kaçırırsan uygulama ikincisini kaçırmaman için hatırlatıyor. Yeniden başladığında da bu dönüş altın renkle görünüyor."
+    },
+    "k_h1": {
+      "en": "Material You design with seven palettes, light and dark",
+      "tr": "Yedi renk paleti, açık ve koyu temayla Material You tasarımı"
+    },
+    "k_h2": {
+      "en": "Home-screen widgets and a Wear OS tile and watch app",
+      "tr": "Ana ekran widget'ları, Wear OS kutucuğu ve saat uygulaması"
+    },
+    "k_h3": {
+      "en": "10 languages; sign in with Google, GitHub or as a guest",
+      "tr": "10 dil; Google, GitHub ya da misafir olarak giriş"
+    },
+    "k_h4": {
+      "en": "Free, open source (MIT) and ad-free",
+      "tr": "Ücretsiz, açık kaynak (MIT) ve reklamsız"
+    },
+    "tag_os": {
+      "en": "Open source",
+      "tr": "Açık kaynak"
+    },
+    "btn_site": {
+      "en": "Website",
+      "tr": "Web sitesi"
+    },
+    "btn_download": {
+      "en": "Download",
+      "tr": "İndir"
+    },
+    "btn_source": {
+      "en": "Source",
+      "tr": "Kaynak kod"
+    },
+    "more_k": {
+      "en": "More on Kinmichi's own site",
+      "tr": "Kinmichi'nin kendi sitesinde daha fazlası"
+    }
+  },
+  "gallery": {
+    "gal_title": {
+      "en": "Screenshots",
+      "tr": "Ekran görüntüleri"
+    },
+    "g1_t": {
+      "en": "Today",
+      "tr": "Bugün"
+    },
+    "g1_d": {
+      "en": "Daily progress, streaks and one-tap check-ins",
+      "tr": "Günlük ilerleme, seriler ve tek dokunuşla işaretleme"
+    },
+    "g2_t": {
+      "en": "Progress",
+      "tr": "İlerleme"
+    },
+    "g2_d": {
+      "en": "Weekly score, completion rate and trends",
+      "tr": "Haftalık skor, tamamlama oranı ve eğilimler"
+    },
+    "g3_t": {
+      "en": "Habit detail",
+      "tr": "Alışkanlık detayı"
+    },
+    "g3_d": {
+      "en": "A full year of a habit at a glance",
+      "tr": "Bir alışkanlığın bütün yılı tek bakışta"
+    },
+    "g4_t": {
+      "en": "Habit editor",
+      "tr": "Alışkanlık ekleme"
+    },
+    "g4_d": {
+      "en": "Adding a habit step by step, with a bad-day version",
+      "tr": "Kötü gün versiyonuyla adım adım alışkanlık ekleme"
+    },
+    "g5_t": {
+      "en": "Widgets",
+      "tr": "Widget'lar"
+    },
+    "g5_d": {
+      "en": "Eight home-screen widgets, from Today to a mini heatmap",
+      "tr": "Bugün'den mini ısı haritasına sekiz ana ekran widget'ı"
+    },
+    "g6_t": {
+      "en": "Wake-up alarm",
+      "tr": "Uyandıran alarm"
+    },
+    "g6_d": {
+      "en": "A real alarm you turn off by solving small tasks",
+      "tr": "Küçük görevleri çözerek kapattığın gerçek bir alarm"
+    }
+  },
+  "sections": {
+    "side_tag": {
+      "en": "Side projects",
+      "tr": "Yan projeler"
+    },
+    "side_title": {
+      "en": "Smaller projects",
+      "tr": "Küçük projeler"
+    },
+    "tool_tag": {
+      "en": "Toolkit",
+      "tr": "Araçlar"
+    },
+    "tool_title": {
+      "en": "Tools I use",
+      "tr": "Kullandığım araçlar"
+    }
+  },
+  "contact": {
+    "c_tag": {
+      "en": "Contact",
+      "tr": "İletişim"
+    },
+    "c_title": {
+      "en": "Get in touch",
+      "tr": "Tanışalım"
+    },
+    "c_lead": {
+      "en": "I'm open to internships and joint projects, and always up for a chat about tech. Email is the quickest way to reach me.",
+      "tr": "Staja ve ortak projelere açığım, teknoloji üzerine sohbet etmeyi de severim. Bana en hızlı e-postayla ulaşırsın."
+    },
+    "c_email": {
+      "en": "Email me",
+      "tr": "E-posta gönder"
+    },
+    "m_app": {
+      "en": "Mail app",
+      "tr": "Mail uygulaması"
+    },
+    "c_copy": {
+      "en": "Copy address",
+      "tr": "Adresi kopyala"
+    },
+    "c_social": {
+      "en": "You can also find me here",
+      "tr": "Beni burada da bulabilirsin"
+    }
+  },
+  "footer": {
+    "back_top": {
+      "en": "Back to top",
+      "tr": "Başa dön"
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "projects": [
+    {
+      "title": "KampüsAğ",
+      "description": {
+        "en": "A community platform for students, alumni and university staff that I built at an R&D camp: events, career advice and shared notes.",
+        "tr": "Bir Ar-Ge kampında geliştirdiğim; öğrenciler, mezunlar ve üniversite yönetimi için bir topluluk platformu: etkinlikler, kariyer tavsiyeleri ve not paylaşımı."
+      },
+      "image": "/assets/kampusag.png",
+      "image_alt": "KampüsAğ sign-in page",
+      "icon": "",
+      "tech": "React · Vite",
+      "tech_icon": "fa-brands fa-react",
+      "live_url": "https://kampusag.abdulsametacikgoz.com",
+      "source_url": "https://github.com/sametackgz41/KampusAg"
+    },
+    {
+      "title": "lnreader-plugins-tr",
+      "description": {
+        "en": "Turkish sources for LNReader, an open-source app for reading light novels.",
+        "tr": "Hafif roman okuma uygulaması LNReader için Türkçe kaynaklar."
+      },
+      "image": "",
+      "image_alt": "",
+      "icon": "fa-solid fa-book-open",
+      "tech": "JavaScript",
+      "tech_icon": "fa-brands fa-js",
+      "live_url": "",
+      "source_url": "https://github.com/sametackgz41/lnreader-plugins-tr"
+    },
+    {
+      "title": "novel-compiler",
+      "description": {
+        "en": "Gathers web novel chapters into an EPUB so you can read them offline.",
+        "tr": "Web romanlarının bölümlerini toplayıp çevrimdışı okumak için EPUB'a çeviriyor."
+      },
+      "image": "",
+      "image_alt": "",
+      "icon": "fa-solid fa-file-zipper",
+      "tech": "Node.js · Express",
+      "tech_icon": "fa-brands fa-node-js",
+      "live_url": "",
+      "source_url": "https://github.com/sametackgz41/novel-compiler"
+    }
+  ]
+}

@@ -319,7 +319,7 @@
         <h1 class="serif">Abdulsamet Açıkgöz</h1>
         <p class="lead" data-i18n-html="hero_lead">I study Management Information Systems at <strong>Bursa Uludağ University</strong>. I'm into AI, and in my free time I build apps I actually want to use myself.</p>
         <div class="meta">
-          <span><i class="fa-solid fa-location-dot"></i>Kocaeli, Türkiye</span>
+          <span><i class="fa-solid fa-location-dot"></i><span data-i18n="location">Kocaeli, Türkiye</span></span>
           <span><i class="fa-solid fa-graduation-cap"></i><span data-i18n="hero_meta_uni">MIS · Bursa Uludağ University</span></span>
         </div>
         <div class="cta">
@@ -346,7 +346,7 @@
         <div class="fact"><i class="fa-solid fa-graduation-cap"></i><div><small data-i18n="fact_study_l">Studying</small><span data-i18n="fact_study">Management Information Systems</span></div></div>
         <div class="fact"><i class="fa-solid fa-building-columns"></i><div><small data-i18n="fact_uni_l">University</small><span data-i18n="fact_uni">Bursa Uludağ University</span></div></div>
         <div class="fact"><i class="fa-solid fa-brain"></i><div><small data-i18n="fact_int_l">Interested in</small><span data-i18n="fact_int">Artificial intelligence · Data · Information systems</span></div></div>
-        <div class="fact"><i class="fa-solid fa-location-dot"></i><div><small data-i18n="fact_loc_l">Based in</small><span>Kocaeli, Türkiye</span></div></div>
+        <div class="fact"><i class="fa-solid fa-location-dot"></i><div><small data-i18n="fact_loc_l">Based in</small><span data-i18n="location">Kocaeli, Türkiye</span></div></div>
       </div>
     </div>
   </div>
@@ -419,7 +419,7 @@
       <span class="eyebrow" data-i18n="side_tag">Side projects</span>
       <h2 class="serif" data-i18n="side_title">Smaller projects</h2>
     </div>
-    <div class="side-grid">
+    <div class="side-grid" id="sideGrid">
       <article class="side reveal">
         <div class="thumb"><img src="assets/kampusag.png" alt="KampüsAğ sign-in page" width="800" height="720" loading="lazy"></div>
         <div class="body">
@@ -470,7 +470,7 @@
       <span class="eyebrow" data-i18n="tool_tag">Toolkit</span>
       <h2 class="serif" data-i18n="tool_title">Tools I use</h2>
     </div>
-    <div class="toolkit">
+    <div class="toolkit" id="toolkit">
       <div class="tool-group reveal">
         <h4><i class="fa-solid fa-mobile-screen"></i><span data-i18n="tool_mobile">Mobile</span></h4>
         <div class="chips"><span>Kotlin</span><span>Jetpack Compose</span><span>Wear OS</span><span>Firebase</span></div>
@@ -504,12 +504,12 @@
             <button type="button" id="copyBtn"><i class="fa-regular fa-copy"></i><span id="copyLabel" data-i18n="c_copy">Copy address</span></button>
           </div>
         </div>
-        <a class="btn" href="https://www.linkedin.com/in/abdulsametacikgoz/"><i class="fa-brands fa-linkedin-in"></i>LinkedIn</a>
-        <a class="btn" href="https://github.com/sametackgz41"><i class="fa-brands fa-github"></i>GitHub</a>
+        <span id="contactBtns" style="display:contents"><a class="btn" href="https://www.linkedin.com/in/abdulsametacikgoz/"><i class="fa-brands fa-linkedin-in"></i>LinkedIn</a>
+        <a class="btn" href="https://github.com/sametackgz41"><i class="fa-brands fa-github"></i>GitHub</a></span>
       </div>
       <span class="sr-only" id="copyStatus" aria-live="polite"></span>
       <p class="social-label" data-i18n="c_social">You can also find me here</p>
-      <ul class="social-list" aria-label="Social media">
+      <ul class="social-list" id="socialList" aria-label="Social media">
         <li><a href="https://www.instagram.com/41samet49/"><i class="fa-brands fa-instagram s-icon" aria-hidden="true"></i><span class="s-name">Instagram</span><span class="s-handle">@41samet49</span><i class="fa-solid fa-arrow-up-right-from-square s-go" aria-hidden="true"></i></a></li>
         <li><a href="https://www.threads.net/@41samet49"><i class="fa-brands fa-threads s-icon" aria-hidden="true"></i><span class="s-name">Threads</span><span class="s-handle">@41samet49</span><i class="fa-solid fa-arrow-up-right-from-square s-go" aria-hidden="true"></i></a></li>
         <li><a href="https://x.com/sametacikgoz41"><i class="fa-brands fa-x-twitter s-icon" aria-hidden="true"></i><span class="s-name">X</span><span class="s-handle">@sametacikgoz41</span><i class="fa-solid fa-arrow-up-right-from-square s-go" aria-hidden="true"></i></a></li>
@@ -654,9 +654,12 @@
   })();
 
   // External links open in a new tab.
-  document.querySelectorAll('a[href^="http"]').forEach(function (a) {
-    if (a.hostname !== location.hostname) { a.target = '_blank'; a.rel = 'noopener'; }
-  });
+  function externalLinks() {
+    document.querySelectorAll('a[href^="http"]').forEach(function (a) {
+      if (a.hostname !== location.hostname) { a.target = '_blank'; a.rel = 'noopener'; }
+    });
+  }
+  externalLinks();
 
   // Gallery arrows.
   (function () {
@@ -686,17 +689,89 @@
     addEventListener('scroll', on, { passive: true }); on();
   })();
 
-  // Reveal on scroll.
-  (function () {
-    var els = document.querySelectorAll('.reveal');
+  // Reveal on scroll. Started once the content files below are in, so the old text never flashes.
+  var io = null;
+  function startReveal() {
+    var els = document.querySelectorAll('.reveal:not(.in)');
     if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('in'); }); return; }
-    var io = new IntersectionObserver(function (entries) {
+    if (!io) io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
     }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
     els.forEach(function (e) { io.observe(e); });
-  })();
+  }
 
   applyLang();
+
+  // Editable content lives in /content/*.json (edited through the admin panel, see .pages.yml).
+  // The text already in this page is only a fallback for when those files can't be loaded.
+  (function () {
+    var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
+    var md = function (s) { return esc(s).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>'); };   // **bold**
+    var plain = function (s) { return String(s == null ? '' : s).replace(/\*\*/g, ''); };
+    var icon = function (s) { return esc(String(s || '').replace(/[^a-z0-9 -]/gi, '')); };
+    var url = function (s) { s = String(s || '').trim(); return /^(https?:\/\/|\/|mailto:)/i.test(s) ? esc(s) : ''; };
+    var setKey = function (key, t, asHtml) {   // registers one EN/TR pair under a data-i18n key
+      if (!t) return;
+      document.querySelectorAll('[data-i18n="' + key + '"]').forEach(function (el) { el.dataset.en = plain(t.en); });
+      document.querySelectorAll('[data-i18n-html="' + key + '"]').forEach(function (el) { el.dataset.enHtml = md(t.en); asHtml = true; });
+      if (t.tr) I18N_TR[key] = asHtml ? md(t.tr) : plain(t.tr);
+    };
+    var get = function (name) {
+      return fetch('content/' + name + '.json', { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw r.status; return r.json(); });
+    };
+
+    function texts(d) {
+      Object.keys(d).forEach(function (g) { Object.keys(d[g] || {}).forEach(function (k) { setKey(k, d[g][k]); }); });
+    }
+
+    function projects(d) {
+      var list = (d && d.projects) || [];
+      if (!list.length) return;
+      document.getElementById('sideGrid').innerHTML = list.map(function (p, i) {
+        var t = esc(p.title), img = url(p.image);
+        var thumb = img
+          ? '<div class="thumb"><img src="' + img + '" alt="' + esc(p.image_alt) + '" loading="lazy"></div>'
+          : '<div class="thumb icon"><i class="' + (icon(p.icon) || 'fa-solid fa-cube') + '"></i></div>';
+        var links = (url(p.live_url) ? '<a href="' + url(p.live_url) + '" aria-label="' + t + ' live demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>' : '')
+          + (url(p.source_url) ? '<a href="' + url(p.source_url) + '" aria-label="' + t + ' source on GitHub"><i class="fa-brands fa-github"></i></a>' : '');
+        return '<article class="side reveal">' + thumb + '<div class="body"><h4>' + t + '</h4>'
+          + '<p data-i18n="side_' + i + '_d"></p><div class="row"><small>'
+          + (p.tech_icon ? '<i class="' + icon(p.tech_icon) + '"></i>' : '') + esc(p.tech) + '</small>'
+          + '<div class="side-links">' + links + '</div></div></div></article>';
+      }).join('');
+      list.forEach(function (p, i) { setKey('side_' + i + '_d', p.description); });
+    }
+
+    function toolkit(d) {
+      var list = (d && d.groups) || [];
+      if (!list.length) return;
+      document.getElementById('toolkit').innerHTML = list.map(function (g, i) {
+        return '<div class="tool-group reveal"><h4><i class="' + icon(g.icon) + '"></i><span data-i18n="tool_' + i + '"></span></h4>'
+          + '<div class="chips">' + (g.chips || []).map(function (c) { return '<span>' + esc(c) + '</span>'; }).join('') + '</div></div>';
+      }).join('');
+      list.forEach(function (g, i) { setKey('tool_' + i, g.title); });
+    }
+
+    function contact(d) {
+      if (!d) return;
+      if (d.buttons && d.buttons.length) document.getElementById('contactBtns').innerHTML = d.buttons.map(function (b) {
+        return '<a class="btn" href="' + url(b.url) + '"><i class="' + icon(b.icon) + '"></i>' + esc(b.label) + '</a>';
+      }).join('');
+      if (d.social && d.social.length) document.getElementById('socialList').innerHTML = d.social.map(function (s) {
+        return '<li><a href="' + url(s.url) + '"><i class="' + icon(s.icon) + ' s-icon" aria-hidden="true"></i><span class="s-name">' + esc(s.name)
+          + '</span><span class="s-handle">' + esc(s.handle) + '</span><i class="fa-solid fa-arrow-up-right-from-square s-go" aria-hidden="true"></i></a></li>';
+      }).join('');
+    }
+
+    var started = false;
+    var show = function () { if (!started) { started = true; startReveal(); } };
+    setTimeout(show, 1200);   // never keep the page hidden for long if the files are slow
+    var safe = function (p, fn) { return p.then(fn, function () {}).catch(function (e) { console.warn('content', e); }); };
+    Promise.all([
+      safe(get('texts'), texts), safe(get('projects'), projects),
+      safe(get('toolkit'), toolkit), safe(get('contact'), contact)
+    ]).then(function () { applyLang(); externalLinks(); startReveal(); started = true; });
+  })();
 </script>
 </body>
 </html>

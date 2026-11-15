@@ -1,0 +1,174 @@
+# Pages CMS ayarları (yönetim paneli: https://abdulsametacikgoz.com/admin)
+# Panelde görünen her alan buradan gelir. Site bu JSON dosyalarını okur.
+media:
+  input: assets
+  output: /assets
+components:
+  tr_en_line:
+    type: object
+    fields:
+      - { name: tr, label: Türkçe, type: string }
+      - { name: en, label: English, type: string }
+  tr_en_text:
+    type: object
+    description: "Kalın yazı için iki yıldız kullan: **böyle**"
+    fields:
+      - { name: tr, label: Türkçe, type: text }
+      - { name: en, label: English, type: text }
+content:
+  - name: texts
+    label: Yazılar (TR / EN)
+    type: file
+    path: content/texts.json
+    format: json
+    fields:
+      - name: nav
+        label: "Üst menü"
+        type: object
+        fields:
+          - { name: nav_about, label: "Menü: Hakkımda", component: tr_en_line }
+          - { name: nav_side, label: "Menü: Yan projeler", component: tr_en_line }
+          - { name: nav_contact, label: "Menü: İletişim", component: tr_en_line }
+      - name: hero
+        label: "Giriş (en üst)"
+        type: object
+        fields:
+          - { name: hero_hello, label: "Selamlama (adın üstündeki küçük yazı)", component: tr_en_line }
+          - { name: hero_lead, label: "Giriş paragrafı", component: tr_en_text }
+          - { name: hero_meta_uni, label: "Bölüm/üniversite satırı", component: tr_en_line }
+          - { name: location, label: "Konum", component: tr_en_line }
+          - { name: hero_cta_work, label: "Buton: Projelerim", component: tr_en_line }
+          - { name: hero_cta_contact, label: "Buton: Bana yaz", component: tr_en_line }
+      - name: about
+        label: "Hakkımda"
+        type: object
+        fields:
+          - { name: about_tag, label: "Küçük etiket", component: tr_en_line }
+          - { name: about_title, label: "Başlık", component: tr_en_line }
+          - { name: about_p1, label: "1. paragraf", component: tr_en_text }
+          - { name: about_p2, label: "2. paragraf", component: tr_en_text }
+          - { name: fact_study_l, label: "Kart: bölüm etiketi", component: tr_en_line }
+          - { name: fact_study, label: "Kart: bölüm", component: tr_en_line }
+          - { name: fact_uni_l, label: "Kart: üniversite etiketi", component: tr_en_line }
+          - { name: fact_uni, label: "Kart: üniversite", component: tr_en_line }
+          - { name: fact_int_l, label: "Kart: ilgi alanları etiketi", component: tr_en_line }
+          - { name: fact_int, label: "Kart: ilgi alanları", component: tr_en_line }
+          - { name: fact_loc_l, label: "Kart: konum etiketi", component: tr_en_line }
+      - name: kinmichi
+        label: "Kinmichi bölümü"
+        type: object
+        fields:
+          - { name: feat_tag, label: "Küçük etiket", component: tr_en_line }
+          - { name: feat_title, label: "Başlık", component: tr_en_line }
+          - { name: k_kanji, label: "Kanji alt yazısı", component: tr_en_line }
+          - { name: k_desc, label: "Açıklama", component: tr_en_text }
+          - { name: k_h1, label: "Madde 1", component: tr_en_text }
+          - { name: k_h2, label: "Madde 2", component: tr_en_text }
+          - { name: k_h3, label: "Madde 3", component: tr_en_text }
+          - { name: k_h4, label: "Madde 4", component: tr_en_text }
+          - { name: tag_os, label: "\"Açık kaynak\" etiketi", component: tr_en_line }
+          - { name: btn_site, label: "Buton: Web sitesi", component: tr_en_line }
+          - { name: btn_download, label: "Buton: İndir", component: tr_en_line }
+          - { name: btn_source, label: "Buton: Kaynak kod", component: tr_en_line }
+          - { name: more_k, label: "Alt bağlantı yazısı", component: tr_en_line }
+      - name: gallery
+        label: "Kinmichi ekran görüntüsü yazıları"
+        type: object
+        fields:
+          - { name: gal_title, label: "Galeri başlığı", component: tr_en_line }
+          - { name: g1_t, label: "1. görsel başlığı", component: tr_en_line }
+          - { name: g1_d, label: "1. görsel açıklaması", component: tr_en_text }
+          - { name: g2_t, label: "2. görsel başlığı", component: tr_en_line }
+          - { name: g2_d, label: "2. görsel açıklaması", component: tr_en_text }
+          - { name: g3_t, label: "3. görsel başlığı", component: tr_en_line }
+          - { name: g3_d, label: "3. görsel açıklaması", component: tr_en_text }
+          - { name: g4_t, label: "4. görsel başlığı", component: tr_en_line }
+          - { name: g4_d, label: "4. görsel açıklaması", component: tr_en_text }
+          - { name: g5_t, label: "5. görsel başlığı", component: tr_en_line }
+          - { name: g5_d, label: "5. görsel açıklaması", component: tr_en_text }
+          - { name: g6_t, label: "6. görsel başlığı", component: tr_en_line }
+          - { name: g6_d, label: "6. görsel açıklaması", component: tr_en_text }
+      - name: sections
+        label: "Bölüm başlıkları"
+        type: object
+        fields:
+          - { name: side_tag, label: "Yan projeler: küçük etiket", component: tr_en_line }
+          - { name: side_title, label: "Yan projeler: başlık", component: tr_en_line }
+          - { name: tool_tag, label: "Araçlar: küçük etiket", component: tr_en_line }
+          - { name: tool_title, label: "Araçlar: başlık", component: tr_en_line }
+      - name: contact
+        label: "İletişim"
+        type: object
+        fields:
+          - { name: c_tag, label: "Küçük etiket", component: tr_en_line }
+          - { name: c_title, label: "Başlık", component: tr_en_line }
+          - { name: c_lead, label: "Açıklama", component: tr_en_text }
+          - { name: c_email, label: "Buton: E-posta gönder", component: tr_en_line }
+          - { name: m_app, label: "Menü: Mail uygulaması", component: tr_en_line }
+          - { name: c_copy, label: "Menü: Adresi kopyala", component: tr_en_line }
+          - { name: c_social, label: "Sosyal medya listesinin üstündeki yazı", component: tr_en_line }
+      - name: footer
+        label: "Alt kısım"
+        type: object
+        fields:
+          - { name: back_top, label: "Başa dön bağlantısı", component: tr_en_line }
+
+  - name: projects
+    label: Yan projeler
+    type: file
+    path: content/projects.json
+    format: json
+    fields:
+      - name: projects
+        label: Projeler (sürükleyerek sırala)
+        type: object
+        list: true
+        fields:
+          - { name: title, label: Proje adı, type: string, required: true }
+          - { name: description, label: Açıklama, component: tr_en_text }
+          - { name: image, label: Görsel (boş bırakırsan aşağıdaki simge görünür), type: image }
+          - { name: image_alt, label: Görselin kısa tarifi (görme engelliler için), type: string }
+          - { name: icon, label: "Simge (görsel yoksa), ör. fa-solid fa-book-open", type: string, description: "Simgeler: https://fontawesome.com/search?ic=free" }
+          - { name: tech, label: "Teknolojiler, ör. React · Vite", type: string }
+          - { name: tech_icon, label: "Teknoloji simgesi, ör. fa-brands fa-react", type: string }
+          - { name: live_url, label: Canlı site bağlantısı (yoksa boş), type: string }
+          - { name: source_url, label: GitHub bağlantısı (yoksa boş), type: string }
+
+  - name: toolkit
+    label: Kullandığım araçlar
+    type: file
+    path: content/toolkit.json
+    format: json
+    fields:
+      - name: groups
+        label: Gruplar
+        type: object
+        list: true
+        fields:
+          - { name: title, label: Grup adı, component: tr_en_line }
+          - { name: icon, label: "Simge, ör. fa-solid fa-code", type: string }
+          - { name: chips, label: Araçlar, type: string, list: true }
+
+  - name: contact
+    label: İletişim ve sosyal medya
+    type: file
+    path: content/contact.json
+    format: json
+    fields:
+      - name: buttons
+        label: E-posta butonunun yanındaki butonlar
+        type: object
+        list: true
+        fields:
+          - { name: label, label: Yazı, type: string }
+          - { name: icon, label: "Simge, ör. fa-brands fa-github", type: string }
+          - { name: url, label: Bağlantı, type: string }
+      - name: social
+        label: Sosyal medya listesi
+        type: object
+        list: true
+        fields:
+          - { name: name, label: Platform, type: string }
+          - { name: handle, label: Kullanıcı adı, type: string }
+          - { name: icon, label: "Simge, ör. fa-brands fa-instagram", type: string }
+          - { name: url, label: Bağlantı, type: string }

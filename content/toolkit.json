@@ -1,0 +1,19 @@
+{
+  "groups": [
+    {
+      "title": { "en": "Mobile", "tr": "Mobil" },
+      "icon": "fa-solid fa-mobile-screen",
+      "chips": ["Kotlin", "Jetpack Compose", "Wear OS", "Firebase"]
+    },
+    {
+      "title": { "en": "Web", "tr": "Web" },
+      "icon": "fa-solid fa-code",
+      "chips": ["JavaScript", "React", "Vite", "Node.js", "Express", "HTML & CSS"]
+    },
+    {
+      "title": { "en": "Other", "tr": "Diğer" },
+      "icon": "fa-solid fa-screwdriver-wrench",
+      "chips": ["C#", "Git & GitHub", "GitHub Actions"]
+    }
+  ]
+}
