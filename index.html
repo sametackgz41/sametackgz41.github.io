@@ -710,8 +710,10 @@
     var plain = function (s) { return String(s == null ? '' : s).replace(/\*\*/g, ''); };
     var icon = function (s) { return esc(String(s || '').replace(/[^a-z0-9 -]/gi, '')); };
     var url = function (s) { s = String(s || '').trim(); return /^(https?:\/\/|\/|mailto:)/i.test(s) ? esc(s) : ''; };
+    var SITE = window.SITE = { data: {}, refs: {} };   // used by the live editor (/admin/editor.js)
     var setKey = function (key, t, asHtml) {   // registers one EN/TR pair under a data-i18n key
       if (!t) return;
+      SITE.refs[key] = t;
       document.querySelectorAll('[data-i18n="' + key + '"]').forEach(function (el) { el.dataset.en = plain(t.en); });
       document.querySelectorAll('[data-i18n-html="' + key + '"]').forEach(function (el) { el.dataset.enHtml = md(t.en); asHtml = true; });
       if (t.tr) I18N_TR[key] = asHtml ? md(t.tr) : plain(t.tr);
@@ -734,9 +736,9 @@
           : '<div class="thumb icon"><i class="' + (icon(p.icon) || 'fa-solid fa-cube') + '"></i></div>';
         var links = (url(p.live_url) ? '<a href="' + url(p.live_url) + '" aria-label="' + t + ' live demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>' : '')
           + (url(p.source_url) ? '<a href="' + url(p.source_url) + '" aria-label="' + t + ' source on GitHub"><i class="fa-brands fa-github"></i></a>' : '');
-        return '<article class="side reveal">' + thumb + '<div class="body"><h4>' + t + '</h4>'
+        return '<article class="side reveal" data-index="' + i + '">' + thumb + '<div class="body"><h4 data-edit="title">' + t + '</h4>'
           + '<p data-i18n="side_' + i + '_d"></p><div class="row"><small>'
-          + (p.tech_icon ? '<i class="' + icon(p.tech_icon) + '"></i>' : '') + esc(p.tech) + '</small>'
+          + (p.tech_icon ? '<i class="' + icon(p.tech_icon) + '"></i>' : '') + '<span data-edit="tech">' + esc(p.tech) + '</span></small>'
           + '<div class="side-links">' + links + '</div></div></div></article>';
       }).join('');
       list.forEach(function (p, i) { setKey('side_' + i + '_d', p.description); });
@@ -766,11 +768,24 @@
     var started = false;
     var show = function () { if (!started) { started = true; startReveal(); } };
     setTimeout(show, 1200);   // never keep the page hidden for long if the files are slow
-    var safe = function (p, fn) { return p.then(fn, function () {}).catch(function (e) { console.warn('content', e); }); };
-    Promise.all([
-      safe(get('texts'), texts), safe(get('projects'), projects),
-      safe(get('toolkit'), toolkit), safe(get('contact'), contact)
-    ]).then(function () { applyLang(); externalLinks(); startReveal(); started = true; });
+    var renderers = { texts: texts, projects: projects, toolkit: toolkit, contact: contact };
+    SITE.setKey = setKey; SITE.md = md; SITE.plain = plain;
+    SITE.render = function (name) {   // re-draws one content file (or all) from SITE.data
+      (name ? [name] : Object.keys(renderers)).forEach(function (n) { if (SITE.data[n]) renderers[n](SITE.data[n]); });
+      applyLang(); externalLinks(); startReveal();
+      if (SITE.onRender) SITE.onRender();
+    };
+    var safe = function (name) {
+      return get(name).then(function (d) { SITE.data[name] = d; renderers[name](d); }, function () {})
+        .catch(function (e) { console.warn('content', e); });
+    };
+    Promise.all(Object.keys(renderers).map(safe))
+      .then(function () { applyLang(); externalLinks(); startReveal(); started = true; });
+
+    // Live editing: abdulsametacikgoz.com/?edit opens the editor (saving needs the owner's GitHub key).
+    if (/[?&]edit\b/.test(location.search)) {
+      var ed = document.createElement('script'); ed.src = '/admin/editor.js'; document.body.appendChild(ed);
+    }
   })();
 </script>
 </body>

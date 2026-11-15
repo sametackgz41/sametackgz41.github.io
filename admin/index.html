@@ -5,14 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>Yönetim paneli</title>
-<meta http-equiv="refresh" content="0; url=https://app.pagescms.org/sametackgz41/sametackgz41.github.io/main">
 <style>
-  body { font: 16px/1.6 system-ui, sans-serif; background: #f4efe5; color: #1b1e25; display: grid; place-items: center; min-height: 100vh; margin: 0; padding: 16px; text-align: center; }
-  @media (prefers-color-scheme: dark) { body { background: #0e1014; color: #ece8df; } a { color: #d4ad57; } }
+  :root { --bg: #f4efe5; --card: #fbf8f2; --text: #1b1e25; --muted: #686c75; --line: #ddd4c3; --accent: #7d5f19; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #0e1014; --card: #171a21; --text: #ece8df; --muted: #9a9ea8; --line: #262a33; --accent: #d4ad57; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 16px; background: var(--bg); color: var(--text); font: 16px/1.6 Inter, system-ui, sans-serif; }
+  main { width: min(460px, 100%); }
+  h1 { font-size: 1.5rem; margin: 0 0 6px; }
+  p { color: var(--muted); margin: 0 0 20px; }
+  a.opt { display: block; padding: 18px 20px; margin-bottom: 12px; border-radius: 18px; background: var(--card); border: 1px solid var(--line); color: var(--text); text-decoration: none; }
+  a.opt:hover { border-color: var(--accent); }
+  a.opt b { display: block; font-size: 1.05rem; }
+  a.opt span { color: var(--muted); font-size: .9rem; }
 </style>
 </head>
 <body>
-  <p>Yönetim paneline yönlendiriliyorsun…<br>
-  <a href="https://app.pagescms.org/sametackgz41/sametackgz41.github.io/main">Açılmazsa buraya tıkla</a></p>
+<main>
+  <h1>Yönetim paneli</h1>
+  <p>Siteyi nasıl düzenlemek istersin?</p>
+  <a class="opt" href="/?edit"><b>✎ Canlı düzenle</b><span>Siteyi olduğu gibi gör, yazılara tıklayıp değiştir.</span></a>
+  <a class="opt" href="https://app.pagescms.org/sametackgz41/sametackgz41.github.io/main"><b>Form paneli (Pages CMS)</b><span>Tüm içerik form alanları hâlinde.</span></a>
+</main>
 </body>
 </html>
